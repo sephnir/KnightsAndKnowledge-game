@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gui/login/Login.gd" type="Script" id=1]
+
+[node name="Pnl_Login" type="Panel"]
+margin_top = -2.05261
+margin_right = 594.0
+margin_bottom = 431.947
+script = ExtResource( 1 )
+
+[node name="LE_Username" type="LineEdit" parent="."]
+margin_left = 162.053
+margin_top = 74.8947
+margin_right = 437.053
+margin_bottom = 134.895
+align = 1
+placeholder_text = "Username"
+caret_blink = true
+
+[node name="LE_Password" type="LineEdit" parent="."]
+margin_left = 162.053
+margin_top = 186.842
+margin_right = 437.053
+margin_bottom = 246.842
+align = 1
+secret = true
+placeholder_text = "Password"
+caret_blink = true
+
+[node name="Btn_Login" type="Button" parent="."]
+margin_left = 239.151
+margin_top = 309.0
+margin_right = 359.151
+margin_bottom = 357.0
+text = "Login"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+use_threads = true
+max_redirects = 4
+[connection signal="button_up" from="Btn_Login" to="." method="_on_Btn_Login_button_up"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

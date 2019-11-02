@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="KnightsKnowledge"
+run/main_scene="res://scene/main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Constants="*res://Constants.gd"
 
 [rendering]
 
