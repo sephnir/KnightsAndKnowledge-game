@@ -14,8 +14,8 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 		json = JSON.parse(body);
 	timeout = -1;
 	$Btn_Login.disabled = false;
-	$PopupPanel.popup_centered();
-	$PopupPanel/Label.set_text(str(json.result));
+	$PP_Notice.popup_centered();
+	$PP_Notice/Lbl_Notice.set_text(str(json.result));
 	print(json.result);
 
 func _on_Btn_Login_button_up():
@@ -26,7 +26,7 @@ func _on_Btn_Login_button_up():
 		request_url = str("http://",$"/root/Constants".HOSTNAME, ":", $"/root/Constants".PORT, api_route);
 	print(request_url);
 	var headers = ["Content-Type: application/json"]
-	var email = $LE_Username.text;
+	var email = $LE_Email.text;
 	var password = $LE_Password.text
 	var query = build_form_data(email, password);
 	print(query)
