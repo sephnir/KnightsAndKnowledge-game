@@ -14,11 +14,16 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 		json = JSON.parse(body);
 	timeout = -1;
 	$Btn_Login.disabled = false;
-	$PP_Notice.popup_centered();
-	$PP_Notice/Lbl_Notice.set_text(str(json.result));
+	if(json.result.error):
+		$PP_Notice/Lbl_Notice.set_text(str(json.result.error));
+		$PP_Notice.popup_centered();
 	print(json.result);
 
 func _on_Btn_Login_button_up():
+	if($LE_Email.text == "" || $LE_Password.text == ""):
+		$PP_Notice/Lbl_Notice.set_text("E-mail/Password cannot be empty.");
+		$PP_Notice.popup_centered();
+		return;	
 	var request_url = "";
 	if($"/root/Constants".PORT == 80 || $"/root/Constants".PORT == 0):
 		request_url = str("http://",$"/root/Constants".HOSTNAME, api_route);
@@ -43,4 +48,4 @@ func _process(delta):
 	elif(timeout==0):
 		timeout = -1;
 		$HTTPRequest.cancel_request();
-		_on_HTTPRequest_request_completed("timeout", 408, [], '{"error":"timeout"}' );
+		_on_HTTPRequest_request_completed("timeout", 408, [], '{"error":"Connection timeout.\nPlease try again."}' );

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://gui/login/Login.gd" type="Script" id=1]
+[ext_resource path="res://graphics/gui/map_btn/logo.png" type="Texture" id=2]
 
 [node name="Pnl_Login" type="Panel"]
 margin_left = 0.735107
@@ -51,20 +52,32 @@ text = "Login"
 use_threads = true
 max_redirects = 4
 
+[node name="logo" type="Sprite" parent="."]
+position = Vector2( 299.265, 92.7877 )
+scale = Vector2( 0.4189, 0.4189 )
+texture = ExtResource( 2 )
+
 [node name="PP_Notice" type="PopupPanel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -100.0
-margin_top = -70.0
+margin_top = -42.5
 margin_right = 100.0
-margin_bottom = 70.0
+margin_bottom = 42.5
 
 [node name="Lbl_Notice" type="Label" parent="PP_Notice"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 196.0
-margin_bottom = 136.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = -38.5
+margin_right = 96.0
+margin_bottom = 38.5
+align = 1
+valign = 1
+autowrap = true
 [connection signal="button_up" from="Btn_Login" to="." method="_on_Btn_Login_button_up"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
