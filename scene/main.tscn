@@ -9,7 +9,7 @@ anchor_bottom = 1.0
 
 [node name="Bg_MapBlur" type="Sprite" parent="."]
 position = Vector2( 512, 301.125 )
-scale = Vector2( 0.833876, 0.688652 )
+scale = Vector2( 0.834, 0.834 )
 texture = ExtResource( 1 )
 
 [node name="Pnl_Login" parent="." instance=ExtResource( 2 )]

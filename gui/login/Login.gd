@@ -2,9 +2,10 @@ extends Panel
 
 var api_route = "/api/login";
 var timeout = -1;
+var global = null;
 
 func _ready():
-	pass # Replace with function body.
+	global = get_node("/root/Global");
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 	var json = "";
@@ -14,11 +15,17 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 		json = JSON.parse(body);
 	timeout = -1;
 	$Btn_Login.disabled = false;
-	if(json.result.error):
-		$PP_Notice/Lbl_Notice.set_text(str(json.result.error));
-		$PP_Notice.popup_centered();
-	print(json.result);
+	
+	if(json.result != null):
+		if(json.result.has("error")):
+			$PP_Notice/Lbl_Notice.set_text(str(json.result.error));
+			$PP_Notice.popup_centered();
+			
+		if(json.result.has("success")):
+			if(json.result.success.has("token")):
+				global.token = json.result.success.token;
 
+#Login
 func _on_Btn_Login_button_up():
 	if($LE_Email.text == "" || $LE_Password.text == ""):
 		$PP_Notice/Lbl_Notice.set_text("E-mail/Password cannot be empty.");
@@ -29,12 +36,12 @@ func _on_Btn_Login_button_up():
 		request_url = str("http://",$"/root/Constants".HOSTNAME, api_route);
 	else:
 		request_url = str("http://",$"/root/Constants".HOSTNAME, ":", $"/root/Constants".PORT, api_route);
-	print(request_url);
+	#print(request_url);
 	var headers = ["Content-Type: application/json"]
 	var email = $LE_Email.text;
 	var password = $LE_Password.text
 	var query = build_form_data(email, password);
-	print(query)
+	#print(query);
 	$HTTPRequest.request(request_url, headers, false, HTTPClient.METHOD_POST, query);
 	timeout = $"/root/Constants".CONNECTION_TIMEOUT;
 	$Btn_Login.disabled = true;
@@ -43,6 +50,9 @@ func build_form_data(email, password):
 	return to_json({"email": email, "password": password});
 	
 func _process(delta):
+	if(global.token != "" and global.token != null):
+		get_tree().change_scene("res://scene/town/map.tscn");
+	
 	if(timeout>0):
 		timeout -= 1;
 	elif(timeout==0):
