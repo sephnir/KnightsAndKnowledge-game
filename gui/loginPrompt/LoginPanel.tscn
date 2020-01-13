@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://gui/login/Login.gd" type="Script" id=1]
+[ext_resource path="res://gui/loginPrompt/Login.gd" type="Script" id=1]
 [ext_resource path="res://graphics/gui/map_btn/logo.png" type="Texture" id=2]
+
 
 [node name="Pnl_Login" type="Panel"]
 margin_left = 0.735107

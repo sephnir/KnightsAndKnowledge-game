@@ -16,6 +16,8 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 	timeout = -1;
 	$Btn_Login.disabled = false;
 	
+	print(json.result);
+	
 	if(json.result != null):
 		if(json.result.has("error")):
 			$PP_Notice/Lbl_Notice.set_text(str(json.result.error));
