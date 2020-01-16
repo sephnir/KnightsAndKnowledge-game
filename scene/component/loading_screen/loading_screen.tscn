@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://graphics/gui/loading_screen/loading_spinner.png" type="Texture" id=1]
+[ext_resource path="res://scene/component/loading_screen/AnimationPlayer.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.993407, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 9, 0 ]
+}
+
+[node name="Cpn_Login" type="Node2D"]
+visible = false
+z_index = 100
+
+[node name="Pnl_Cover" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.780392 )
+margin_right = 1027.0
+margin_bottom = 600.0
+
+[node name="Spr_Spinner" type="Sprite" parent="."]
+position = Vector2( 520, 290 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+vframes = 2
+hframes = 5
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spr_Spinner"]
+anims/Spin = SubResource( 1 )
+script = ExtResource( 2 )
