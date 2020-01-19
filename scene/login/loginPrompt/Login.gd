@@ -15,7 +15,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 		json = JSON.parse(body);
 	timeout = -1;
 	$Btn_Login.disabled = false;
-	$Cpn_Login.visible = false;
+	$Cpn_Loading.visible = false;
 	
 	print(json.result);
 	
@@ -48,7 +48,7 @@ func _on_Btn_Login_button_up():
 	$HTTPRequest.request(request_url, headers, false, HTTPClient.METHOD_POST, query);
 	timeout = $"/root/Constants".CONNECTION_TIMEOUT;
 	$Btn_Login.disabled = true;
-	$Cpn_Login.visible = true;
+	$Cpn_Loading.visible = true;
 
 func build_form_data(email, password):
 	return to_json({"email": email, "password": password});

@@ -21,7 +21,8 @@ func _ready():
 	else:
 		request_url = str("http://",$"/root/Constants".HOSTNAME, ":", $"/root/Constants".PORT, api_detail_route);
 	var headers = ["Accept: application/json", "Authorization: Bearer " + $"/root/Global".token];
-		
+	
+	$Cpn_Loading.visible = true;
 	$HTTPRequest.request(request_url, headers, false, HTTPClient.METHOD_POST);
 	
 
@@ -54,3 +55,4 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 				ind += 1;
 			
 			print(json.result.success);
+			$Cpn_Loading.visible = false;

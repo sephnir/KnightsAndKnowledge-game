@@ -24,5 +24,5 @@ margin_right = 297.0
 margin_bottom = 217.0
 rect_pivot_offset = Vector2( 686.51, 95.8536 )
 
-[node name="Cpn_Login" parent="Pnl_Login" instance=ExtResource( 3 )]
+[node name="Cpn_Loading" parent="Pnl_Login" instance=ExtResource( 3 )]
 position = Vector2( -215, -83 )

@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ 0, 9, 0 ]
 }
 
-[node name="Cpn_Login" type="Node2D"]
+[node name="Cpn_Loading" type="Node2D"]
 visible = false
 z_index = 100
 

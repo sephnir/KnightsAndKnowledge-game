@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/character_select/profile_box/profile_box.gd" type="Script" id=1]
 [ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=2]
 [ext_resource path="res://graphics/gui/character_select/plus.png" type="Texture" id=3]
+[ext_resource path="res://scene/character_select/profile_box/character_display.tscn" type="PackedScene" id=4]
 
 [node name="Btn_Profile" type="Button"]
 margin_right = 300.0
@@ -11,9 +12,9 @@ rect_min_size = Vector2( 300, 0 )
 script = ExtResource( 1 )
 
 [node name="Lbl_Name" type="Label" parent="."]
-margin_top = 280.0
+margin_top = 290.0
 margin_right = 300.0
-margin_bottom = 347.0
+margin_bottom = 400.0
 custom_fonts/font = ExtResource( 2 )
 text = "Create New"
 align = 1
@@ -21,4 +22,21 @@ align = 1
 [node name="Spr_Plus" type="Sprite" parent="."]
 position = Vector2( 150, 140 )
 texture = ExtResource( 3 )
+
+[node name="VpC_Character" type="ViewportContainer" parent="."]
+margin_left = 30.0
+margin_top = 22.0
+margin_right = 270.0
+margin_bottom = 262.0
+mouse_filter = 1
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="VpC_Character"]
+size = Vector2( 240, 240 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Spatial" parent="VpC_Character/Viewport" instance=ExtResource( 4 )]
 [connection signal="button_up" from="." to="." method="_on_Btn_Profile_button_up"]

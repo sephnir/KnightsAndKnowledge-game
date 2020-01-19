@@ -15,7 +15,9 @@ material/1 = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.77 )
+projection = 1
 current = true
-size = 2.57043
+fov = 53.7579
+size = 1.14325
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]

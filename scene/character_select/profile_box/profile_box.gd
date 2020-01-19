@@ -7,23 +7,28 @@ var charId = -1;
 var charName = "Create\nNew";
 var experience = 0;
 var money = 0;
+var global;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	global = get_node("/root/Global");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	
 	get_node("Lbl_Name").text = charName;
 	if(charId >= 0):
-		get_node("Spr_Plus").visible = false;
+		$Spr_Plus.visible = false;
+		$VpC_Character.visible = true;
 	else:
-		get_node("Spr_Plus").visible = true;
+		$Spr_Plus.visible = true;
+		$VpC_Character.visible = false;
 		
 
 
 func _on_Btn_Profile_button_up():
 	print(charId);
+	if(charId != -1):
+		global.character = charId;
+		get_tree().change_scene("res://scene/town/map.tscn");
 	pass # Replace with function body.
