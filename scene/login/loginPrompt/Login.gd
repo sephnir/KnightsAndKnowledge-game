@@ -9,11 +9,11 @@ func _ready():
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 	var json = "";
+	timeout = -1;
 	if(typeof(body) == TYPE_RAW_ARRAY):
 		json = JSON.parse(body.get_string_from_utf8());
 	else:
 		json = JSON.parse(body);
-	timeout = -1;
 	$Btn_Login.disabled = false;
 	$Cpn_Loading.visible = false;
 	
@@ -27,6 +27,9 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 		if(json.result.has("success")):
 			if(json.result.success.has("token")):
 				global.token = json.result.success.token;
+	else:
+		$PP_Notice/Lbl_Notice.set_text("Unable to connect to server.");
+		$PP_Notice.popup_centered();
 
 #Login
 func _on_Btn_Login_button_up():
@@ -39,12 +42,11 @@ func _on_Btn_Login_button_up():
 		request_url = str("http://",$"/root/Constants".HOSTNAME, api_route);
 	else:
 		request_url = str("http://",$"/root/Constants".HOSTNAME, ":", $"/root/Constants".PORT, api_route);
-	#print(request_url);
+
 	var headers = ["Content-Type: application/json"]
 	var email = $LE_Email.text;
 	var password = $LE_Password.text
 	var query = build_form_data(email, password);
-	#print(query);
 	$HTTPRequest.request(request_url, headers, false, HTTPClient.METHOD_POST, query);
 	timeout = $"/root/Constants".CONNECTION_TIMEOUT;
 	$Btn_Login.disabled = true;
