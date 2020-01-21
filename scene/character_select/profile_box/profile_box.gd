@@ -30,5 +30,5 @@ func _on_Btn_Profile_button_up():
 	print(charId);
 	if(charId != -1):
 		global.character = charId;
-		get_tree().change_scene("res://scene/menu/town/map.tscn");
+		get_tree().change_scene("res://scene/menu/town/menu.tscn");
 	pass # Replace with function body.
