@@ -3,12 +3,16 @@ extends Node2D
 var room = preload("res://scene/game/dungeon/room/room.tscn");
 var player = preload("res://scene/game/player/Player.tscn");
 
+var player_inst;
+
 var tile_size = 32;
 var num_rooms = 20;
 var min_size = 6;
 var max_size = 14;
 var hspread = 20;
 var cull = 0.3;
+
+var velocity = Vector2(0,0);
 
 onready var tile = $TM_Overworld;
 
@@ -47,9 +51,11 @@ func make_rooms():
 	yield(get_tree(), "idle_frame");
 	path = find_mst(roompos_arr);
 	make_map();
-	var p = player.instance();
-	p.position = start_room.position;
-	$Player.add_child(p);
+	player_inst = player.instance();
+	player_inst.position = start_room.position;
+	$Player.add_child(player_inst);
+	#var p = $Player;
+	#$Player.position = start_room.position;
 
 func find_mst(nodes):
 	# Find minimum spanning tree using Prim's algorithm
@@ -171,5 +177,11 @@ func _draw():
 				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y),
 						  Color(1, 1, 0), 15, true);
 
+func move_player():
+	if(player_inst):
+		player_inst.velocity = $GUI/Control/Analog.velocity;
+		
+	
 func _process(delta):
+	move_player();
 	update();
