@@ -30,7 +30,6 @@ func _process(delta):
 		inner_pos = mouse_pos;
 		
 	velocity = (inner_pos - position) / bound_radius;
-	print(velocity);
 
 	if(alpha<=0):
 		visible = false;

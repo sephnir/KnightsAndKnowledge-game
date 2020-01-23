@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scene/component/character/Sphere.obj" type="ArrayMesh" id=1]
 
-[node name="Spatial" type="Spatial"]
+[node name="PlayerModel" type="Spatial"]
 
 [node name="Sphere" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
@@ -17,4 +17,4 @@ fov = 53.7579
 size = 1.14325
 
 [node name="OmniLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 1 )

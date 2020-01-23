@@ -23,7 +23,7 @@ transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Character" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="PlayerModel" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

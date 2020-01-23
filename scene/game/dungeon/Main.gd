@@ -126,6 +126,7 @@ func make_map():
 				carve_path(start, end)
 		corridors.append(p)
 		clear_rooms();
+	path = null;
 
 func clear_rooms():
 	for n in $Room.get_children():
