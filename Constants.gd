@@ -5,3 +5,5 @@ const HOSTNAME = "127.0.0.1";
 const PORT = 8000;
 
 const CONNECTION_TIMEOUT = 500;
+
+const DUNGEON_UNIT = 32;

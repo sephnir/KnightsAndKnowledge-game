@@ -2,10 +2,10 @@ extends Panel
 
 var api_route = "/api/login";
 var timeout = -1;
-var global = null;
+onready var global = get_node("/root/Global");
 
 func _ready():
-	global = get_node("/root/Global");
+	pass;
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body ):
 	var json = "";

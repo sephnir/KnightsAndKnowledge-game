@@ -1,20 +1,31 @@
+## Based on Procedual Dungeon Generation tutorial series by Chris Bradfield:
+# http://kidscancode.org/blog/2018/12/godot3_procgen6/
+
 extends Node2D
 
 var room = preload("res://scene/game/dungeon/room/room.tscn");
 var player = preload("res://scene/game/player/Player.tscn");
+var enemy = preload("res://scene/game/enemy/Enemy.tscn");
+
+onready var constants = get_node("/root/Constants");
+onready var global = get_node("/root/Global");
 
 var player_inst;
+var player_pos = Vector2();
 
-var tile_size = 32;
+onready var tile_size = constants.DUNGEON_UNIT;
 var num_rooms = 20;
 var min_size = 6;
 var max_size = 14;
 var hspread = 20;
-var cull = 0.3;
+var room_width = 2500;
+var room_height = 1500;
+var cull = 0.5;
 
 var velocity = Vector2(0,0);
 
 onready var tile = $TM_Overworld;
+var tile_solid_index = [1];
 
 # A-star pathfinding
 var path; 
@@ -24,39 +35,55 @@ var end_room = null
 var play_mode = false  
 
 func _ready():
-	randomize();
+	#randomize();
+	global.dungeon_rand.set_seed(hash("test"));
+	global.movement_rand.set_seed(hash("test"));
 	make_rooms();
 	
+#Create layout of rooms
 func make_rooms():
 	for t in range(num_rooms):
-		var pos = Vector2(rand_range(-hspread, hspread),0);
+		var pos = Vector2(global.dungeon_rand.randf_range(-room_width/2, room_width/2),
+			global.dungeon_rand.randf_range(-room_height/2, room_height/2));
 		var r = room.instance();
-		var w = min_size+ randi() % (max_size - min_size);
-		var h = min_size+ randi() % (max_size - min_size);
+		var w = min_size+ global.dungeon_rand.randi() % (max_size - min_size);
+		var h = min_size+ global.dungeon_rand.randi() % (max_size - min_size);
 		r.make_room(pos, Vector2(w, h) * tile_size);
 		$Room.add_child(r);
 		
-	# Wait for movement to stop
-	yield(get_tree().create_timer(1.1), "timeout");
 	# Cull rooms
 	var roompos_arr = [];
+	
 	for r in $Room.get_children():
-		if(randf() < cull):
+		yield(get_tree(), "idle_frame");
+		var size = r.get_overlapping_areas().size();
+		if(r.get_overlapping_areas().size()> 0):
+			$Room.remove_child(r);
 			r.queue_free();
-		else:
-			r.mode = RigidBody2D.MODE_STATIC;
-			roompos_arr.append(
-				Vector3(r.position.x, r.position.y, 0));
-		
-	yield(get_tree(), "idle_frame");
+	
+	for r in $Room.get_children():
+		roompos_arr.append(
+			Vector3(r.position.x, r.position.y, 0));
+
 	path = find_mst(roompos_arr);
 	make_map();
-	player_inst = player.instance();
-	player_inst.position = start_room.position;
-	$Player.add_child(player_inst);
-	#var p = $Player;
-	#$Player.position = start_room.position;
+	setup_player_inst();
+	populate_dungeon(tile);
 
+#TODO - Populate dungeon with enemies and chests
+func populate_dungeon(tile):
+	for i in range(3):
+		var enemy_inst = enemy.instance();
+		enemy_inst.init(tile, tile_solid_index, start_room.position);
+		$Enemy.add_child(enemy_inst);
+
+#Initialize player instance
+func setup_player_inst():
+	player_inst = player.instance();
+	player_inst.init(start_room.position);
+	$Player.add_child(player_inst);
+
+#Generate MST from given nodes
 func find_mst(nodes):
 	# Find minimum spanning tree using Prim's algorithm
 	# Initialize the AStar and add the first point
@@ -86,7 +113,8 @@ func find_mst(nodes):
 		# Remove the node from the array so it isn't visited again
 		nodes.erase(min_p);
 	return path;
-		
+
+#Create a map of tiles
 func make_map():
 	# Create a TileMap from the generated rooms and path
 	tile.clear()
@@ -128,20 +156,24 @@ func make_map():
 		clear_rooms();
 	path = null;
 
+#Remove all rooms instances (Used after generating tiles from room layouts)
 func clear_rooms():
 	for n in $Room.get_children():
 		n.queue_free();
-		
+
+#Create a path between each rooms on the tiles
 func carve_path(pos1, pos2):
 	# Carve a path between two points
 	var x_diff = sign(pos2.x - pos1.x)
 	var y_diff = sign(pos2.y - pos1.y)
-	if x_diff == 0: x_diff = pow(-1.0, randi() % 2)
-	if y_diff == 0: y_diff = pow(-1.0, randi() % 2)
+	if x_diff == 0: x_diff = pow(-1.0, global.dungeon_rand.randi() % 2)
+	else: global.dungeon_rand.randi();
+	if y_diff == 0: y_diff = pow(-1.0, global.dungeon_rand.randi() % 2)
+	else: global.dungeon_rand.randi();
 	# choose either x/y or y/x
 	var x_y = pos1
 	var y_x = pos2
-	if (randi() % 2) > 0:
+	if (global.dungeon_rand.randi() % 2) > 0:
 		x_y = pos2
 		y_x = pos1
 	for x in range(pos1.x, pos2.x, x_diff):
@@ -151,6 +183,7 @@ func carve_path(pos1, pos2):
 		tile.set_cell(y_x.x, y, 0)
 		tile.set_cell(y_x.x + x_diff, y, 0)
 
+#Set the start position
 func find_start_room():
 	var min_x = INF
 	for room in $Room.get_children():
@@ -158,6 +191,7 @@ func find_start_room():
 			start_room = room
 			min_x = room.position.x
 
+#Set the goal position
 func find_end_room():
 	var max_x = -INF
 	for room in $Room.get_children():
@@ -165,6 +199,7 @@ func find_end_room():
 			end_room = room
 			max_x = room.position.x
 
+#Shape drawing from room creation (Only for debugging)
 func _draw():
 	for r in $Room.get_children():
 		draw_rect( Rect2(r.position - r.room_size, r.room_size*2), 
@@ -178,11 +213,24 @@ func _draw():
 				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y),
 						  Color(1, 1, 0), 15, true);
 
+#Moves player based on analog controls input
 func move_player():
 	if(player_inst):
 		player_inst.velocity = $GUI/Control/Analog.velocity;
+		update_player_pos();
 		
-	
+#Update in-game time when player moves to another grid
+func update_player_pos():
+	if(player_pos != player_inst.grid):
+		player_pos = player_inst.grid;
+		move_enemy();
+
+#TODO - Moves enemy (grid-based)
+func move_enemy():
+	for e in $Enemy.get_children():
+		e.move_random();
+
+#Called on every frame
 func _process(delta):
 	move_player();
 	update();

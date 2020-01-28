@@ -1,10 +1,9 @@
-extends RigidBody2D
+extends Area2D
 
 var room_size;
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass;
 
 func make_room(pos, size):
 	position = pos;

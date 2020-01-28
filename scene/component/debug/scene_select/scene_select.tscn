@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scene/component/debug/scene_select.gd" type="Script" id=1]
+[ext_resource path="res://scene/component/debug/scene_select/scene_select.gd" type="Script" id=1]
+
 
 [node name="SceneSelect" type="OptionButton"]
 margin_right = 162.0
