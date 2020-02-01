@@ -36,10 +36,16 @@ var play_mode = false
 
 func _ready():
 	#randomize();
-	global.dungeon_rand.set_seed(hash("test"));
-	global.movement_rand.set_seed(hash("test"));
+	global.dungeon_rand.set_seed(hash("physics"));
+	global.movement_rand.set_seed(hash("physics"));
 	make_rooms();
 	
+func _signal_room_created():
+	make_map();
+	setup_player_inst();
+	populate_dungeon(tile);
+	clear_rooms();
+
 #Create layout of rooms
 func make_rooms():
 	for t in range(num_rooms):
@@ -66,17 +72,30 @@ func make_rooms():
 			Vector3(r.position.x, r.position.y, 0));
 
 	path = find_mst(roompos_arr);
-	make_map();
-	setup_player_inst();
-	populate_dungeon(tile);
+	
+	_signal_room_created();
 
 #TODO - Populate dungeon with enemies and chests
 func populate_dungeon(tile):
-	for i in range(3):
-		var enemy_inst = enemy.instance();
-		enemy_inst.init(tile, tile_solid_index, start_room.position);
-		$Enemy.add_child(enemy_inst);
+	#generate_items(tile);
+	generate_enemies(tile);
 
+func generate_enemies(tile):
+	var enemies_count = 0;
+	for r in $Room.get_children():
+		if r == start_room: continue;
+		
+		for i in range(global.dungeon_rand.randi_range(0,3)):
+			var room_shape = r.get_node("CS_Room").shape.get_extents();
+			var rand_pos = Vector2(
+				global.dungeon_rand.randi_range(r.position.x,room_shape.x + r.position.x - tile_size),
+				global.dungeon_rand.randi_range(r.position.y,room_shape.y + r.position.y - tile_size));
+			
+			var enemy_inst = enemy.instance();
+			enemy_inst.init(tile, tile_solid_index, rand_pos);
+			$Enemy.add_child(enemy_inst);
+			enemies_count += 1;
+	pass;
 #Initialize player instance
 func setup_player_inst():
 	player_inst = player.instance();
@@ -153,7 +172,6 @@ func make_map():
 													path.get_point_position(conn).y))									
 				carve_path(start, end)
 		corridors.append(p)
-		clear_rooms();
 	path = null;
 
 #Remove all rooms instances (Used after generating tiles from room layouts)
@@ -201,6 +219,7 @@ func find_end_room():
 
 #Shape drawing from room creation (Only for debugging)
 func _draw():
+	
 	for r in $Room.get_children():
 		draw_rect( Rect2(r.position - r.room_size, r.room_size*2), 
 			Color(10,10,100), false);
@@ -225,6 +244,12 @@ func update_player_pos():
 		player_pos = player_inst.grid;
 		move_enemy();
 
+func update_entity_depth():
+	for e in $Enemy.get_children():
+		e.z_index = room_height/2 + e.position.y/10.0;
+	for p in $Player.get_children():
+		p.z_index = room_height/2 + p.position.y/10.0;
+
 #TODO - Moves enemy (grid-based)
 func move_enemy():
 	for e in $Enemy.get_children():
@@ -233,4 +258,5 @@ func move_enemy():
 #Called on every frame
 func _process(delta):
 	move_player();
+	update_entity_depth();
 	update();

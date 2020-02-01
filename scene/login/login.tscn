@@ -8,6 +8,9 @@
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Bg_MapBlur" type="Sprite" parent="."]
 position = Vector2( 638.963, 360 )
@@ -15,6 +18,7 @@ scale = Vector2( 1.04403, 0.834 )
 texture = ExtResource( 1 )
 
 [node name="SceneSelect" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Pnl_Login" parent="." instance=ExtResource( 3 )]
 anchor_left = 0.5
