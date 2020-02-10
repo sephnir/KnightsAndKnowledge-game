@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/temp.png-42517d1bcabd5ea9a803abc091b9a83a.stex"
+path="res://.import/guildbg.jpg-959af860539f43a01014f741a1e4e456.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprite/temp.png"
-dest_files=[ "res://.import/temp.png-42517d1bcabd5ea9a803abc091b9a83a.stex" ]
+source_file="res://graphics/bg/guild/guildbg.jpg"
+dest_files=[ "res://.import/guildbg.jpg-959af860539f43a01014f741a1e4e456.stex" ]
 
 [params]
 
@@ -20,11 +20,11 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
