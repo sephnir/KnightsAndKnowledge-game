@@ -21,6 +21,7 @@ margin_top = -30.0002
 margin_right = 137.5
 margin_bottom = 30.0002
 align = 1
+max_length = 255
 placeholder_text = "E-mail"
 caret_blink = true
 
@@ -34,6 +35,7 @@ margin_top = 51.5952
 margin_right = 137.5
 margin_bottom = 111.595
 align = 1
+max_length = 255
 secret = true
 placeholder_text = "Password"
 caret_blink = true
