@@ -25,12 +25,7 @@ func _ready():
 	$Cpn_Loading.visible = true;
 	$HTTPRequest.request(request_url, headers, false, HTTPClient.METHOD_POST);
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+# Function callback after fetching character data from API call
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 	var json = "";
 	if(typeof(body) == TYPE_RAW_ARRAY):

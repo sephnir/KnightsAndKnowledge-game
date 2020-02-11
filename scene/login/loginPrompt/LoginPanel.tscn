@@ -67,7 +67,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[node name="HR_Auth" type="HTTPRequest" parent="."]
+
+[node name="HR_Login" type="HTTPRequest" parent="."]
 max_redirects = 4
 
 [node name="logo" type="Sprite" parent="."]
@@ -81,4 +83,5 @@ margin_top = -78.5
 margin_right = 185.0
 margin_bottom = 78.5
 [connection signal="button_up" from="Btn_Login" to="." method="_on_Btn_Login_button_up"]
-[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="request_completed" from="HR_Auth" to="." method="_on_HR_Auth_request_completed"]
+[connection signal="request_completed" from="HR_Login" to="." method="_on_HR_Login_request_completed"]
