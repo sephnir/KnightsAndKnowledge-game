@@ -24,11 +24,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -297.0
-margin_top = -217.0
-margin_right = 297.0
-margin_bottom = 217.0
-rect_pivot_offset = Vector2( 686.51, 95.8536 )
+margin_left = -363.5
+margin_top = -265.5
+margin_right = 363.5
+margin_bottom = 265.5
 
 [node name="Cpn_Loading" parent="Pnl_Login" instance=ExtResource( 4 )]
-position = Vector2( -345.076, -143 )
+position = Vector2( -276.5, -94.5 )

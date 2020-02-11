@@ -1,15 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scene/login/loginPrompt/Login.gd" type="Script" id=1]
 [ext_resource path="res://graphics/gui/map_btn/logo.png" type="Texture" id=2]
 [ext_resource path="res://scene/component/dialog_box/dialog_box.tscn" type="PackedScene" id=3]
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=4]
 
 [node name="Pnl_Login" type="Panel"]
-margin_left = 0.735107
-margin_top = -2.7877
-margin_right = 594.735
-margin_bottom = 431.212
+margin_left = 1.0
+margin_top = -3.0
+margin_right = 728.0
+margin_bottom = 528.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LE_Email" type="LineEdit" parent="."]
 anchor_left = 0.5
@@ -17,13 +21,17 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -137.5
-margin_top = -30.0002
+margin_top = -31.3606
 margin_right = 137.5
-margin_bottom = 30.0002
+margin_bottom = 38.6394
+custom_fonts/font = ExtResource( 4 )
 align = 1
 max_length = 255
 placeholder_text = "E-mail"
 caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LE_Password" type="LineEdit" parent="."]
 anchor_left = 0.5
@@ -31,34 +39,46 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -137.5
-margin_top = 51.5952
+margin_top = 65.8112
 margin_right = 137.5
-margin_bottom = 111.595
+margin_bottom = 125.811
+custom_fonts/font = ExtResource( 4 )
 align = 1
 max_length = 255
 secret = true
 placeholder_text = "Password"
 caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Btn_Login" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -60.0
-margin_top = 136.25
-margin_right = 60.0
-margin_bottom = 184.25
+margin_left = -81.7924
+margin_top = 164.982
+margin_right = 79.2076
+margin_bottom = 228.982
+custom_fonts/font = ExtResource( 4 )
 text = "Login"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 max_redirects = 4
 
 [node name="logo" type="Sprite" parent="."]
-position = Vector2( 299.265, 92.7877 )
-scale = Vector2( 0.4189, 0.4189 )
+position = Vector2( 366.734, 112.173 )
+scale = Vector2( 0.556874, 0.556874 )
 texture = ExtResource( 2 )
 
 [node name="PP_Notice" parent="." instance=ExtResource( 3 )]
+margin_left = -185.0
+margin_top = -78.5
+margin_right = 185.0
+margin_bottom = 78.5
 [connection signal="button_up" from="Btn_Login" to="." method="_on_Btn_Login_button_up"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
