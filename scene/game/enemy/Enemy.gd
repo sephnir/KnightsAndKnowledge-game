@@ -1,8 +1,7 @@
 extends Node2D
 
 onready var global = get_node("/root/Global");
-onready var constants = get_node("/root/Constants");
-onready var unit = constants.DUNGEON_UNIT;
+onready var unit = global.DUNGEON_UNIT;
 onready var grid_pos = Vector2();
 
 var momentum_grid = Vector2();

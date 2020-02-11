@@ -1,6 +1,5 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scene/menu/town/map.gd" type="Script" id=1]
 [ext_resource path="res://graphics/bg/map/town-min.png" type="Texture" id=2]
 [ext_resource path="res://graphics/bg/map/town-blur.png" type="Texture" id=3]
 [ext_resource path="res://scene/menu/town/Bg_MapBlur.gd" type="Script" id=4]
@@ -10,9 +9,11 @@
 [ext_resource path="res://graphics/gui/map_btn/guild_icon.png" type="Texture" id=8]
 [ext_resource path="res://graphics/gui/map_btn/quest.png" type="Texture" id=9]
 [ext_resource path="res://graphics/gui/map_btn/guild.png" type="Texture" id=10]
+[ext_resource path="res://scene/component/auth/Auth.tscn" type="PackedScene" id=11]
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource( 1 )
+[node name="Menu" type="Node2D"]
+
+[node name="Auth" parent="." instance=ExtResource( 11 )]
 
 [node name="Bg_Map" type="Sprite" parent="."]
 position = Vector2( 640, 358.64 )
@@ -82,12 +83,9 @@ position = Vector2( 92.7587, 64.7723 )
 scale = Vector2( 1.74096, 1.49932 )
 texture = ExtResource( 10 )
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
 [node name="PP_Notice" parent="." instance=ExtResource( 6 )]
 margin_left = -92.6016
 margin_top = 369.512
 margin_right = 107.398
 margin_bottom = 454.512
 [connection signal="button_up" from="Btn_Blacksmith" to="Btn_Blacksmith" method="_on_blacksmith_button_up"]
-[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

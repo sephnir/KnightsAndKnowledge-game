@@ -3,9 +3,9 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+onready var global = $"/root/Global";
+onready var routes = $"/root/API";
 
-var api_detail_route = "/api/character/details";
-var api_create_route = "/api/character/create";
 var panel = [];
 
 # Called when the node enters the scene tree for the first time.
@@ -15,12 +15,12 @@ func _ready():
 	panel.append(get_node("MgC_ProfileList/VBox_ProfileList/HBox_ProfileList/Pnl_Profile2"));
 	panel.append(get_node("MgC_ProfileList/VBox_ProfileList/HBox_ProfileList/Pnl_Profile3"));
 	
-	var request_url = "";
-	if($"/root/Constants".PORT == 80 || $"/root/Constants".PORT == 0):
-		request_url = str("http://",$"/root/Constants".HOSTNAME, api_detail_route);
-	else:
-		request_url = str("http://",$"/root/Constants".HOSTNAME, ":", $"/root/Constants".PORT, api_detail_route);
-	var headers = ["Accept: application/json", "Authorization: Bearer " + $"/root/Global".token];
+	var request_url = global.get_request_url(routes.API_CHARA_SHOW);
+	var headers = [
+		"Content-Type: application/json", 
+		"Accept: application/json",
+		global.get_bearer()
+	]
 	
 	$Cpn_Loading.visible = true;
 	$HTTPRequest.request(request_url, headers, false, HTTPClient.METHOD_POST);

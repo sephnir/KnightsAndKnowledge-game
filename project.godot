@@ -25,6 +25,7 @@ Constants="*res://Constants.gd"
 IconLoader="*res://addons/file-editor/scripts/IconLoader.gd"
 LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
 Global="*res://Global.gd"
+API="*res://API.gd"
 
 [display]
 

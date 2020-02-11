@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scene/component/auth/Auth.gd" type="Script" id=1]
+
+[node name="Auth" type="Node"]
+script = ExtResource( 1 )
+
+[node name="HR_Auth" type="HTTPRequest" parent="."]
+[connection signal="request_completed" from="HR_Auth" to="." method="_on_HR_Auth_request_completed"]

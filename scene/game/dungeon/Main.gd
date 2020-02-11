@@ -7,13 +7,12 @@ var room = preload("res://scene/game/dungeon/room/room.tscn");
 var player = preload("res://scene/game/player/Player.tscn");
 var enemy = preload("res://scene/game/enemy/Enemy.tscn");
 
-onready var constants = get_node("/root/Constants");
 onready var global = get_node("/root/Global");
 
 var player_inst;
 var player_pos = Vector2();
 
-onready var tile_size = constants.DUNGEON_UNIT;
+onready var tile_size = global.DUNGEON_UNIT;
 var num_rooms = 20;
 var min_size = 6;
 var max_size = 14;
