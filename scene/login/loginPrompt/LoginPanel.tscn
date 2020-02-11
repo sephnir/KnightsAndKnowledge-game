@@ -20,10 +20,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -137.5
-margin_top = -31.3606
-margin_right = 137.5
-margin_bottom = 38.6394
+margin_left = -225.0
+margin_top = -35.0
+margin_right = 225.0
+margin_bottom = 35.0
 custom_fonts/font = ExtResource( 4 )
 align = 1
 max_length = 255
@@ -38,10 +38,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -137.5
-margin_top = 65.8112
-margin_right = 137.5
-margin_bottom = 125.811
+margin_left = -225.0
+margin_top = 66.4727
+margin_right = 225.0
+margin_bottom = 136.473
 custom_fonts/font = ExtResource( 4 )
 align = 1
 max_length = 255
@@ -58,9 +58,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -81.7924
-margin_top = 164.982
+margin_top = 176.561
 margin_right = 79.2076
-margin_bottom = 228.982
+margin_bottom = 240.561
 custom_fonts/font = ExtResource( 4 )
 text = "Login"
 __meta__ = {
@@ -78,10 +78,7 @@ scale = Vector2( 0.556874, 0.556874 )
 texture = ExtResource( 2 )
 
 [node name="PP_Notice" parent="." instance=ExtResource( 3 )]
-margin_left = -185.0
-margin_top = -78.5
-margin_right = 185.0
-margin_bottom = 78.5
+visible = false
 [connection signal="button_up" from="Btn_Login" to="." method="_on_Btn_Login_button_up"]
 [connection signal="request_completed" from="HR_Auth" to="." method="_on_HR_Auth_request_completed"]
 [connection signal="request_completed" from="HR_Login" to="." method="_on_HR_Login_request_completed"]

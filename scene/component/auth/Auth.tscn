@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scene/component/auth/Auth.gd" type="Script" id=1]
+[ext_resource path="res://scene/component/dialog_box/dialog_box.tscn" type="PackedScene" id=2]
 
-[node name="Auth" type="Node"]
+[node name="Auth" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PP_Notice" parent="." instance=ExtResource( 2 )]
+margin_left = 455.0
+margin_top = 281.5
+margin_right = 825.0
+margin_bottom = 438.5
 
 [node name="HR_Auth" type="HTTPRequest" parent="."]
+[connection signal="popup_hide" from="PP_Notice" to="." method="_on_PP_Notice_popup_hide"]
 [connection signal="request_completed" from="HR_Auth" to="." method="_on_HR_Auth_request_completed"]

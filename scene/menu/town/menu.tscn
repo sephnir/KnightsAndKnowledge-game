@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://scene/component/logout/logout.tscn" type="PackedScene" id=1]
 [ext_resource path="res://graphics/bg/map/town-min.png" type="Texture" id=2]
 [ext_resource path="res://graphics/bg/map/town-blur.png" type="Texture" id=3]
 [ext_resource path="res://scene/menu/town/Bg_MapBlur.gd" type="Script" id=4]
@@ -10,8 +11,10 @@
 [ext_resource path="res://graphics/gui/map_btn/quest.png" type="Texture" id=9]
 [ext_resource path="res://graphics/gui/map_btn/guild.png" type="Texture" id=10]
 [ext_resource path="res://scene/component/auth/Auth.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scene/menu/town/menu.gd" type="Script" id=12]
 
 [node name="Menu" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="Auth" parent="." instance=ExtResource( 11 )]
 
@@ -88,4 +91,12 @@ margin_left = -92.6016
 margin_top = 369.512
 margin_right = 107.398
 margin_bottom = 454.512
+
+[node name="Btn_Logout" parent="." instance=ExtResource( 1 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1177.43
+margin_right = 1278.43
+margin_bottom = 40.0
 [connection signal="button_up" from="Btn_Blacksmith" to="Btn_Blacksmith" method="_on_blacksmith_button_up"]
+[connection signal="button_up" from="Btn_Guild" to="." method="_on_Btn_Guild_button_up"]
