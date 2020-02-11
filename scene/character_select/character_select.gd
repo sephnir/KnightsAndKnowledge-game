@@ -27,11 +27,7 @@ func _ready():
 	
 # Function callback after fetching character data from API call
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
-	var json = "";
-	if(typeof(body) == TYPE_RAW_ARRAY):
-		json = JSON.parse(body.get_string_from_utf8());
-	else:
-		json = JSON.parse(body);
+	var json = JSON.parse(body.get_string_from_utf8());
 	
 	if(json.result != null):
 		if(json.result.has("error")):

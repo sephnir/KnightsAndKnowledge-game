@@ -33,10 +33,4 @@ func _on_Btn_Back_button_up():
 	label.text = label.MSG_DICT["restart"]
 	state = GUILD_STATE.START;
 
-func _on_Btn_ICDone_button_up():
-	$Cpn_Loading.visible = true;
-	var request_url = global.get_request_url(routes.API_GUILD_SHOW);
-	
-	var headers = ["Accept: application/json", "Authorization: Bearer " + global.token];
-	$HR_Auth.request(request_url, headers, false, HTTPClient.METHOD_POST);
-	pass # Replace with function body.
+

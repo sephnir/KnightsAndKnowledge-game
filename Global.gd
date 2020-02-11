@@ -15,12 +15,14 @@ const GUILD_PATH = "user://guild.data";
 
 # Global variables
 var token = "";
-var guild = "";
+
+## Guild
+var guild_name = "";
+var guild_token = "";
 
 var character = -1;
 var dungeon_rand = RandomNumberGenerator.new();
 var movement_rand = RandomNumberGenerator.new();
-
 
 func save_auth(auth):
 	_save_file(AUTH_PATH, auth);
@@ -28,19 +30,21 @@ func save_auth(auth):
 func load_auth():
 	return _load_file(AUTH_PATH);
 
-func _save_file(path, auth):
+func _save_file(path, obj):
 	var f = File.new();
 	f.open_encrypted_with_pass(path, File.WRITE, OS.get_unique_id());
-	f.store_string(auth);
+#	f.open(path, File.WRITE);
+	f.store_var(obj);
 	f.close();
-
+	
 func _load_file(path):
 	var f = File.new();
 	if f.file_exists(path):
 		f.open_encrypted_with_pass(path, File.READ, OS.get_unique_id());
-		var auth = f.get_as_text();
+#		f.open(path, File.READ);
+		var obj = f.get_var();
 		f.close();
-		return auth;
+		return obj;
 	return null;
 
 # Form a request url
