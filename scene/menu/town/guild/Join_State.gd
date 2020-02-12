@@ -39,6 +39,7 @@ func _on_HR_JoinGuild_request_completed(result, response_code, headers, body):
 			label.text = label.MSG_DICT['join_success'];
 			global.guild_name = json.result.success.name;
 			global.guild_token = json.result.success.guild_token;
+			global.save_guild();
 			guild.state = guild.GUILD_STATE.START;
 		else:
 			label.text = label.MSG_DICT['join_fail'];

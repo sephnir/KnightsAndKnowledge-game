@@ -218,7 +218,7 @@ func find_end_room():
 
 #Shape drawing from room creation (Only for debugging)
 func _draw():
-	
+	return;
 	for r in $Room.get_children():
 		draw_rect( Rect2(r.position - r.room_size, r.room_size*2), 
 			Color(10,10,100), false);
@@ -230,6 +230,7 @@ func _draw():
 				var cp = path.get_point_position(c);
 				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y),
 						  Color(1, 1, 0), 15, true);
+	
 
 #Moves player based on analog controls input
 func move_player():

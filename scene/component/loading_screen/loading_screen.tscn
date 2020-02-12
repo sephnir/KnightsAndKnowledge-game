@@ -20,16 +20,18 @@ tracks/0/keys = {
 }
 
 [node name="Cpn_Loading" type="Node2D"]
-visible = false
 z_index = 100
 
 [node name="Pnl_Cover" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0.780392 )
 margin_right = 1280.0
 margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Spr_Spinner" type="Sprite" parent="."]
-position = Vector2( 640, 330 )
+position = Vector2( 640, 360 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 vframes = 2

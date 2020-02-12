@@ -2,8 +2,8 @@ extends Node
 
 # Constants
 #const HOSTNAME = "www.mocky.io/v2/5dbe8ce1330000ce20a0e3ec";
-const HOSTNAME = "127.0.0.1";
-#const HOSTNAME = "192.168.1.72";
+#const HOSTNAME = "127.0.0.1";
+const HOSTNAME = "192.168.1.72";
 const PORT = 8000;
 
 const CONNECTION_TIMEOUT = 500;
@@ -29,6 +29,16 @@ func save_auth(auth):
 
 func load_auth():
 	return _load_file(AUTH_PATH);
+	
+func save_guild():
+	var guild = {'name': guild_name, 'token': guild_token}
+	_save_file(GUILD_PATH, guild);
+	
+func load_guild():
+	var guild = _load_file(GUILD_PATH);
+	if(guild):
+		guild_name = guild.name;
+		guild_token = guild.token;
 
 func _save_file(path, obj):
 	var f = File.new();

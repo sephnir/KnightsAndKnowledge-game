@@ -17,6 +17,13 @@ onready var routes = $"/root/API";
 func _ready():
 	pass # Replace with function body.
 
+func _process(delta):
+	if(global.guild_name):
+		$Lbl_Active.visible = true;
+		$Lbl_Active.text = "Current active guild: (%s) %s" % [global.guild_token, global.guild_name];
+	else:
+		$Lbl_Active.visible = false;
+
 func _on_Btn_Join_button_up():
 	label.text = label.MSG_DICT["join"]
 	state = GUILD_STATE.JOIN;
