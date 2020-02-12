@@ -1,15 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=1]
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scene/menu/sidebar/Lbl_Welcome.gd" type="Script" id=2]
+[ext_resource path="res://scene/component/active_guild/Lbl_Active.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/component/logout/logout.tscn" type="PackedScene" id=4]
 
 [node name="Pnl_Sidebar" type="Panel"]
-margin_right = 280.0
-margin_bottom = 600.0
+self_modulate = Color( 0.760784, 0.827451, 0.929412, 1 )
+margin_right = 295.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Label" type="Label" parent="."]
+[node name="Lbl_Welcome" type="Label" parent="."]
 margin_left = 30.0
-margin_top = 30.0
-margin_right = 240.0
-margin_bottom = 80.0
+margin_top = 22.4633
+margin_right = 271.0
+margin_bottom = 122.463
 custom_fonts/font = ExtResource( 1 )
 text = "Welcome!"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lbl_Active" parent="." instance=ExtResource( 3 )]
+margin_left = 30.0
+margin_top = 165.0
+margin_right = 271.0
+margin_bottom = 360.0
+autowrap = true
+clip_text = true
+
+[node name="Btn_Logout" parent="." instance=ExtResource( 4 )]
+margin_left = 169.687
+margin_top = 623.745
+margin_right = -24.3126
+margin_bottom = -33.2553
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 129.631
+margin_right = 295.0
+margin_bottom = 159.631

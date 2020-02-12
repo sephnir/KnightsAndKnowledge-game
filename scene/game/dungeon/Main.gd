@@ -84,7 +84,7 @@ func generate_enemies(tile):
 	for r in $Room.get_children():
 		if r == start_room: continue;
 		
-		for i in range(global.dungeon_rand.randi_range(0,3)):
+		for i in range(global.dungeon_rand.randi_range(0,5)):
 			var room_shape = r.get_node("CS_Room").shape.get_extents();
 			var rand_pos = Vector2(
 				global.dungeon_rand.randi_range(r.position.x,room_shape.x + r.position.x - tile_size),

@@ -30,4 +30,5 @@ margin_right = 363.5
 margin_bottom = 265.5
 
 [node name="Cpn_Loading" parent="Pnl_Login" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -276.5, -94.5 )

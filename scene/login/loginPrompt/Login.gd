@@ -8,6 +8,7 @@ onready var routes = get_node("/root/API");
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	temp_token = str(global.load_auth());
+	$Cpn_Loading.visible = false;
 	if(temp_token != null && temp_token != ""):
 		$Btn_Login.disabled = true;
 		$Cpn_Loading.visible = true;

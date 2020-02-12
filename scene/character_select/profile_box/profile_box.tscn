@@ -5,7 +5,6 @@
 [ext_resource path="res://graphics/gui/character_select/plus.png" type="Texture" id=3]
 [ext_resource path="res://scene/component/character/character_display.tscn" type="PackedScene" id=4]
 
-
 [node name="Btn_Profile" type="Button"]
 margin_right = 300.0
 margin_bottom = 400.0

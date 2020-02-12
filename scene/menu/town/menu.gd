@@ -8,3 +8,7 @@ func _ready():
 
 func _on_Btn_Guild_button_up():
 	get_tree().change_scene("res://scene/menu/town/guild/guild.tscn");
+
+
+func _on_Btn_Quest_button_up():
+	get_tree().change_scene("res://scene/menu/town/quest/quest.tscn");

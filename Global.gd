@@ -20,7 +20,10 @@ var token = "";
 var guild_name = "";
 var guild_token = "";
 
+## Character
 var character = -1;
+var character_name = "";
+
 var dungeon_rand = RandomNumberGenerator.new();
 var movement_rand = RandomNumberGenerator.new();
 
@@ -31,14 +34,31 @@ func load_auth():
 	return _load_file(AUTH_PATH);
 	
 func save_guild():
-	var guild = {'name': guild_name, 'token': guild_token}
-	_save_file(GUILD_PATH, guild);
+	var guilds = _load_file(GUILD_PATH);
+	var exist = false;
+	if(guilds):
+		for guild in guilds:
+			if(guild.has('chara')&&guild.has('name')&&guild.has('token')):
+				if(guild.chara == character):
+					guild.name = guild_name;
+					guild.token = guild_token;
+					exist = true;
+					break;
+	else:
+		guilds = [];
+	
+	if(!exist):
+		guilds.append({'chara': character, 'name': guild_name, 'token': guild_token});
+		
+	_save_file(GUILD_PATH, guilds);
 	
 func load_guild():
-	var guild = _load_file(GUILD_PATH);
-	if(guild):
-		guild_name = guild.name;
-		guild_token = guild.token;
+	var guilds = _load_file(GUILD_PATH);
+	if(guilds):
+		for guild in guilds:
+			if(guild.chara == character):
+				guild_name = guild.name;
+				guild_token = guild.token;
 
 func _save_file(path, obj):
 	var f = File.new();

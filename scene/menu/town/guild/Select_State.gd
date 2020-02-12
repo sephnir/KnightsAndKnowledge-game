@@ -13,7 +13,7 @@ func _ready():
 func force_scroll_style():
 	vsbar.rect_min_size.x = 20;
 	vsbar.rect_scale.x= 2;
-	vsbar.rect_position.x = 600;
+	vsbar.rect_position.x = ilguilds.rect_size.x - vsbar.rect_min_size.x * vsbar.rect_scale.x;
 	vsbar.update();
 	
 func fetch_guilds():

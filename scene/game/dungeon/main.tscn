@@ -12,6 +12,7 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 1
 cell_y_sort = true
+compatibility_mode = true
 collision_use_kinematic = true
 format = 1
 

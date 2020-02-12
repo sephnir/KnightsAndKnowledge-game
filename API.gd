@@ -10,3 +10,5 @@ const API_CHARA_JOIN_GUILD = "character/join";
 const API_CHARA_JOINED_GUILD = "character/joined";
 
 const API_GUILD_SHOW = "guild/details";
+
+const API_QUEST_LIST = "quest/list";
