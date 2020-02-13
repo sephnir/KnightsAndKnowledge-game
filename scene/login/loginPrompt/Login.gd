@@ -15,6 +15,7 @@ func _ready():
 		auth_check();
 
 func auth_check():
+	timeout = global.CONNECTION_TIMEOUT;
 	var request_url = global.get_request_url(routes.API_USER_SHOW);
 	var headers = ["Accept: application/json", "Authorization: Bearer " + temp_token];
 	$HR_Auth.request(request_url, headers, false, HTTPClient.METHOD_POST);
@@ -22,6 +23,7 @@ func auth_check():
 # Function callback from authenticating token API call
 func _on_HR_Auth_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8());
+	timeout = -1;
 	if(json.result != null):
 		if(json.result.has("success")):
 			global.token = global.load_auth();
@@ -80,6 +82,7 @@ func _process(delta):
 		timeout -= 1;
 	elif(timeout==0):
 		timeout = -1;
+		$HR_Auth.cancel_request();
 		$HR_Login.cancel_request();
 		var error = '{"error":"Connection timeout.\nPlease try again."}';
 		_on_HR_Login_request_completed("timeout", 408, [], error.to_utf8());

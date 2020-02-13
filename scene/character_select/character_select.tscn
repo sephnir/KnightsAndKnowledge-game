@@ -14,11 +14,14 @@ script = ExtResource( 1 )
 margin_left = 40.0
 margin_top = 40.0
 margin_right = 980.0
-margin_bottom = 560.0
+margin_bottom = 609.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBox_ProfileList" type="VBoxContainer" parent="MgC_ProfileList"]
 margin_right = 940.0
-margin_bottom = 520.0
+margin_bottom = 569.0
 custom_constants/separation = 50
 
 [node name="Lbl_Title" type="Label" parent="MgC_ProfileList/VBox_ProfileList"]
@@ -36,14 +39,17 @@ rect_min_size = Vector2( 0, 400 )
 custom_constants/separation = 20
 
 [node name="Pnl_Profile1" parent="MgC_ProfileList/VBox_ProfileList/HBox_ProfileList" instance=ExtResource( 3 )]
+margin_bottom = 400.0
 
 [node name="Pnl_Profile2" parent="MgC_ProfileList/VBox_ProfileList/HBox_ProfileList" instance=ExtResource( 3 )]
 margin_left = 320.0
 margin_right = 620.0
+margin_bottom = 400.0
 
 [node name="Pnl_Profile3" parent="MgC_ProfileList/VBox_ProfileList/HBox_ProfileList" instance=ExtResource( 3 )]
 margin_left = 640.0
 margin_right = 940.0
+margin_bottom = 400.0
 
 [node name="Cpn_Loading" parent="." instance=ExtResource( 4 )]
 position = Vector2( -133.897, -58.7191 )

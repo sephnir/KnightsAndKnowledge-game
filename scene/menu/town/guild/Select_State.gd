@@ -8,6 +8,7 @@ onready var ilguilds = $IL_Guilds;
 onready var vsbar = ilguilds.get_v_scroll();
 
 func _ready():
+	visible = false;
 	guild = find_parent("Guild");
 
 func force_scroll_style():
@@ -39,7 +40,7 @@ func _on_HR_FetchGuilds_request_completed(result, response_code, headers, body):
 			label.text = label.MSG_DICT['select'];
 			setup_list(json.result.success);
 		else:
-			label.text = label.MSG_DICT['join_fail'];
+			label.text = label.MSG_DICT['select_fail'];
 
 func _process(delta):
 	force_scroll_style();
@@ -71,6 +72,7 @@ func _on_Select_State_visibility_changed():
 func _on_Btn_SSDone_button_up():
 	var selected = ilguilds.get_selected_items();
 	var label = get_tree().get_current_scene().find_node('Lbl_Dialogue');
+	if(!selected): return;
 	selected = selected[0];
 	global.guild_name = ilguilds.get_item_metadata(selected).name;
 	global.guild_token = ilguilds.get_item_metadata(selected).token;

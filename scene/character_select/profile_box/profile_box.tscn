@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scene/character_select/profile_box/profile_box.gd" type="Script" id=1]
-[ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=2]
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=2]
 [ext_resource path="res://graphics/gui/character_select/plus.png" type="Texture" id=3]
 [ext_resource path="res://scene/component/character/character_display.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/character_select/profile_box/PU_Create.gd" type="Script" id=5]
 
 [node name="Btn_Profile" type="Button"]
 margin_right = 300.0
-margin_bottom = 400.0
+margin_bottom = 436.0
 rect_min_size = Vector2( 300, 0 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Lbl_Name" type="Label" parent="."]
 margin_top = 290.0
@@ -18,6 +22,9 @@ margin_bottom = 400.0
 custom_fonts/font = ExtResource( 2 )
 text = "Create New"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Spr_Plus" type="Sprite" parent="."]
 position = Vector2( 150, 140 )
@@ -39,4 +46,86 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Spatial" parent="VpC_Character/Viewport" instance=ExtResource( 4 )]
+
+[node name="PU_Create" type="Popup" parent="."]
+visible = true
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 510.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 500, 150 )
+rect_clip_content = true
+popup_exclusive = true
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HR_CreateChara" type="HTTPRequest" parent="PU_Create"]
+
+[node name="Pnl_Create" type="Panel" parent="PU_Create"]
+margin_right = 500.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LE_Name" type="LineEdit" parent="PU_Create/Pnl_Create"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -225.0
+margin_top = 19.828
+margin_right = 225.0
+margin_bottom = 63.828
+rect_min_size = Vector2( 400, 0 )
+custom_fonts/font = ExtResource( 2 )
+align = 1
+max_length = 30
+clear_button_enabled = true
+placeholder_text = "Character Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_Create" type="Button" parent="PU_Create/Pnl_Create"]
+margin_left = 298.586
+margin_top = 87.4763
+margin_right = 399.586
+margin_bottom = 127.476
+custom_fonts/font = ExtResource( 2 )
+text = "Create"
+
+[node name="Btn_Cancel" type="Button" parent="PU_Create/Pnl_Create"]
+margin_left = 108.471
+margin_top = 87.4763
+margin_right = 205.471
+margin_bottom = 127.476
+custom_fonts/font = ExtResource( 2 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PUD_Error" type="PopupDialog" parent="PU_Create"]
+visible = true
+margin_right = 300.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 300, 100 )
+rect_clip_content = true
+
+[node name="Lbl_Msg" type="Label" parent="PU_Create/PUD_Error"]
+margin_left = 11.6635
+margin_top = 12.0
+margin_right = 194.664
+margin_bottom = 62.0
+rect_min_size = Vector2( 150, 0 )
+rect_scale = Vector2( 1.5, 1.5 )
+rect_clip_content = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="." to="." method="_on_Btn_Profile_button_up"]
+[connection signal="request_completed" from="PU_Create/HR_CreateChara" to="PU_Create" method="_on_HR_CreateChara_request_completed"]
+[connection signal="button_up" from="PU_Create/Pnl_Create/Btn_Create" to="PU_Create" method="_on_Btn_Create_button_up"]
+[connection signal="button_up" from="PU_Create/Pnl_Create/Btn_Cancel" to="PU_Create" method="_on_Btn_Cancel_button_up"]

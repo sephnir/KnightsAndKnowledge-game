@@ -78,7 +78,6 @@ scale = Vector2( 0.556874, 0.556874 )
 texture = ExtResource( 2 )
 
 [node name="PP_Notice" parent="." instance=ExtResource( 3 )]
-visible = false
 [connection signal="button_up" from="Btn_Login" to="." method="_on_Btn_Login_button_up"]
 [connection signal="request_completed" from="HR_Auth" to="." method="_on_HR_Auth_request_completed"]
 [connection signal="request_completed" from="HR_Login" to="." method="_on_HR_Login_request_completed"]

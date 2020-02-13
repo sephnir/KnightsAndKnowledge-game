@@ -6,6 +6,7 @@ const MSG_DICT = {
 	
 	"select": "Please select the guild that you want to participate in.\n",
 	"select_success": "You have selected %s!\n",
+	"select_fail": "There are no guilds listed. Please try again if you have joined a guild before.\n",
 	
 	"leave": "Have a safe adventure!\n",
 	

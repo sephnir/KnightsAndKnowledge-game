@@ -151,6 +151,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Back"
 
 [node name="Select_State" type="Control" parent="."]
+visible = false
 margin_right = 1280.0
 margin_bottom = 719.0
 script = ExtResource( 10 )
