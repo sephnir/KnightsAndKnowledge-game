@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Btn_Ans" type="Button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -261.0
+margin_top = -48.0
+margin_right = 261.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -24,6 +24,12 @@ var guild_token = "";
 var character = -1;
 var character_name = "";
 
+## Quest
+var quest = null;
+
+## Topic
+var topics = null;
+
 var dungeon_rand = RandomNumberGenerator.new();
 var movement_rand = RandomNumberGenerator.new();
 

@@ -18,6 +18,12 @@ func force_scroll_style():
 	vsbar.update();
 	
 func fetch_quests():
+	if(global.guild_token == ""):
+		$IL_Quest/Lbl_Notice.visible = true;
+		$IL_Quest/Lbl_Notice.text = "You have not joined any guild. Please visit the guild and try again.";
+		$Cpn_Loading.visible = false;
+		return;
+		
 	var request_url = global.get_request_url(routes.API_QUEST_LIST);
 	var headers = [
 		"Content-Type: application/json",
@@ -42,6 +48,7 @@ func _process(delta):
 	force_scroll_style();
 
 func setup_list(list):
+	$IL_Quest/Lbl_Notice.text = "No quests available in this guild.";
 	$IL_Quest/Lbl_Notice.visible = true;
 	$IL_Quest.clear();
 	var i = 0;
@@ -59,6 +66,8 @@ func _on_Btn_Back_button_up():
 
 func _on_IL_Quest_item_selected(index):
 	var item = $IL_Quest.get_item_metadata(index);
+	$Pnl_QuestDesc.quest = item;
 	$Pnl_QuestDesc/Lbl_Title.text = item.name;
 	$Pnl_QuestDesc/Lbl_Desc.text = "Levels: %s" % item.level;
 	$Pnl_QuestDesc.visible = true;
+

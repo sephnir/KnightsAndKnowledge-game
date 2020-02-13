@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=1]
+[ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scene/menu/town/quest/QuestDescription/Pnl_QuestDesc.gd" type="Script" id=3]
+
+[node name="Pnl_QuestDesc" type="Panel"]
+margin_left = 763.0
+margin_top = 140.0
+margin_right = 1240.0
+margin_bottom = 700.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HR_FetchTopics" type="HTTPRequest" parent="."]
+
+[node name="Lbl_Title" type="Label" parent="."]
+margin_right = 477.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 2 )
+text = "Quest Title Sample"
+align = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HS_Top" type="HSeparator" parent="."]
+margin_top = 74.0
+margin_right = 477.0
+margin_bottom = 78.0
+
+[node name="Lbl_Desc" type="Label" parent="."]
+margin_left = 18.0
+margin_top = 101.0
+margin_right = 462.0
+margin_bottom = 433.0
+custom_fonts/font = ExtResource( 1 )
+text = "Descripton Sample"
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HS_Bottom" type="HSeparator" parent="."]
+margin_top = 452.051
+margin_right = 477.0
+margin_bottom = 456.051
+
+[node name="Btn_Depart" type="Button" parent="."]
+margin_left = 18.0
+margin_top = 475.0
+margin_right = 462.0
+margin_bottom = 541.0
+custom_fonts/font = ExtResource( 2 )
+text = "Depart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="request_completed" from="HR_FetchTopics" to="." method="_on_HR_FetchTopics_request_completed"]
+[connection signal="button_up" from="Btn_Depart" to="." method="_on_Btn_Depart_button_up"]

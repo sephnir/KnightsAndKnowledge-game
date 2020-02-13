@@ -1,5 +1,6 @@
 extends Node2D
 
+var disabled = false;
 var mouse_pos = Vector2(0,0);
 var inner_pos = Vector2(0,0);
 var outer_radius = 120;
@@ -14,6 +15,12 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	if(disabled): 
+		visible = false;
+		mouse_pos = position;
+		velocity = Vector2(0,0);
+		return;
+		
 	if(Input.is_action_just_pressed("mouse_left")):
 		position = get_viewport().get_mouse_position()/2;
 	if(Input.is_action_pressed("mouse_left")):

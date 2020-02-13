@@ -25,8 +25,8 @@ func _on_HR_Auth_request_completed(result, response_code, headers, body):
 			$PP_Notice/Lbl_Notice.set_text("Connection error.\nPlease try again.");
 			$PP_Notice.popup_centered();
 			
-		if(json.result.has("success")):
-			print(json.result.success);
+#		if(json.result.has("success")):
+#			print(json.result.success);
 
 func _on_PP_Notice_popup_hide():
 	get_node("/root/Global").token = "";

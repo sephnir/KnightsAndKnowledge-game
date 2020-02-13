@@ -7,7 +7,8 @@ var room = preload("res://scene/game/dungeon/room/room.tscn");
 var player = preload("res://scene/game/player/Player.tscn");
 var enemy = preload("res://scene/game/enemy/Enemy.tscn");
 
-onready var global = get_node("/root/Global");
+onready var global = $"/root/Global";
+onready var routes = $"/root/API";
 
 var player_inst;
 var player_pos = Vector2();
@@ -35,8 +36,8 @@ var play_mode = false
 
 func _ready():
 	#randomize();
-	global.dungeon_rand.set_seed(hash("physics"));
-	global.movement_rand.set_seed(hash("physics"));
+	global.dungeon_rand.set_seed(hash(global.quest.dungeon_seed));
+	global.movement_rand.set_seed(hash(global.quest.dungeon_seed));
 	make_rooms();
 	
 func _signal_room_created():

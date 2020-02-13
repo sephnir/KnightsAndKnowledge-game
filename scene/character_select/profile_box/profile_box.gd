@@ -27,7 +27,6 @@ func _process(delta):
 
 
 func _on_Btn_Profile_button_up():
-	print(charId);
 	if(charId != -1):
 		global.character = charId;
 		global.character_name = charName;

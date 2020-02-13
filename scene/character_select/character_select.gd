@@ -45,5 +45,4 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 				panel[ind].money = result.money;
 				ind += 1;
 			
-			print(json.result.success);
 			$Cpn_Loading.visible = false;

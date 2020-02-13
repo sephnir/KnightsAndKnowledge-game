@@ -4,7 +4,7 @@
 [ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scene/component/loading_screen/loading_screen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://font/UI.tres" type="DynamicFont" id=4]
-[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=5]
+[ext_resource path="res://scene/menu/town/quest/QuestDescription/Pnl_QuestDesc.tscn" type="PackedScene" id=5]
 
 [node name="Quest" type="Control"]
 anchor_right = 1.0
@@ -41,6 +41,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "No quests available in this guild."
 align = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Btn_Back" type="Button" parent="."]
 margin_left = 53.0
@@ -69,60 +72,7 @@ custom_fonts/font = ExtResource( 4 )
 text = "Select a quest"
 align = 1
 
-[node name="Pnl_QuestDesc" type="Panel" parent="."]
-margin_left = 763.0
-margin_top = 140.0
-margin_right = 1240.0
-margin_bottom = 700.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Lbl_Title" type="Label" parent="Pnl_QuestDesc"]
-margin_right = 477.0
-margin_bottom = 74.0
-custom_fonts/font = ExtResource( 2 )
-text = "Quest Title Sample"
-align = 1
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HS_Top" type="HSeparator" parent="Pnl_QuestDesc"]
-margin_top = 74.0
-margin_right = 477.0
-margin_bottom = 78.0
-
-[node name="Lbl_Desc" type="Label" parent="Pnl_QuestDesc"]
-margin_left = 18.0
-margin_top = 101.0
-margin_right = 462.0
-margin_bottom = 433.0
-custom_fonts/font = ExtResource( 5 )
-text = "Descripton Sample"
-autowrap = true
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HS_Bottom" type="HSeparator" parent="Pnl_QuestDesc"]
-margin_top = 452.051
-margin_right = 477.0
-margin_bottom = 456.051
-
-[node name="Btn_Depart" type="Button" parent="Pnl_QuestDesc"]
-margin_left = 18.0
-margin_top = 475.0
-margin_right = 462.0
-margin_bottom = 541.0
-custom_fonts/font = ExtResource( 2 )
-text = "Depart"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Pnl_QuestDesc" parent="." instance=ExtResource( 5 )]
 [connection signal="item_selected" from="IL_Quest" to="." method="_on_IL_Quest_item_selected"]
 [connection signal="button_up" from="Btn_Back" to="." method="_on_Btn_Back_button_up"]
 [connection signal="request_completed" from="HR_FetchQuests" to="." method="_on_HR_FetchQuests_request_completed"]
-[connection signal="button_up" from="Pnl_QuestDesc/Btn_Depart" to="." method="_on_Btn_Back_button_up"]
