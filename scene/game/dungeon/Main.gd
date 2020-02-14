@@ -39,11 +39,8 @@ var open_tile_pos = [];
 
 func _ready():
 	randomize();
-	if(global.quest.dungeon_seed):
-		global.dungeon_rand.set_seed(hash(global.quest.dungeon_seed));
-	else:
-		global.dungeon_rand.set_seed(hash(global.quest.name));
-	global.movement_rand.set_seed(hash(global.quest.dungeon_seed));
+	global.dungeon_rand.set_seed(hash(global.dungeon_seed));
+	global.movement_rand.set_seed(hash(global.dungeon_seed));
 	make_rooms();
 	
 func _signal_room_created():
@@ -277,7 +274,9 @@ func move_player():
 func update_player_pos():
 	if(player_pos != player_inst.grid):
 		player_pos = player_inst.grid;
+		check_goal();
 		move_enemy();
+		
 
 func update_entity_depth():
 	for e in $Enemy.get_children():
@@ -296,6 +295,22 @@ func check_battle(player, enemy):
 	var dist_x = abs(player.grid.x - enemy.grid_pos.x);
 	var dist_y = abs(player.grid.y - enemy.grid_pos.y);
 	return (dist_x + dist_y) <= 2;
+
+func check_goal():
+	var player = $Player.get_children()[0];
+	if (player.grid.x == floor($Spr_Goal.position.x/ tile_size) ):
+		if (player.grid.y == floor($Spr_Goal.position.y/ tile_size) ):
+			next_level();
+
+func next_level():
+	if(global.current_floor == global.quest.level):
+		quest_complete();
+	global.current_floor += 1;
+	global.dungeon_seed = hash(global.dungeon_seed);
+	get_tree().change_scene("res://scene/game/dungeon/main.tscn");
+	
+func quest_complete():
+	get_tree().change_scene("res://scene/menu/town/menu.tscn");
 
 func battle(enemy):
 	$GUI/PU_Quiz.activate(enemy, [$GUI/Control/Analog]);

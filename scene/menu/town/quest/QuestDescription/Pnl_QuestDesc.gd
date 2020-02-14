@@ -6,7 +6,7 @@ onready var routes = $"/root/API";
 onready var load_spinner = find_parent("Quest").find_node("Cpn_Loading");
 
 func _on_Btn_Depart_button_up():
-	global.quest = quest;
+	init_global();
 	load_spinner.visible = true;
 	var request_url = global.get_request_url(routes.API_TOPIC_QUESTION_LIST);
 	var headers = [
@@ -20,6 +20,13 @@ func _on_Btn_Depart_button_up():
 	
 	$HR_FetchTopics.request(request_url, headers, false, HTTPClient.METHOD_POST, query);
 	
+func init_global():
+	global.quest = quest;
+	if(global.quest.dungeon_seed):
+		global.dungeon_seed = hash(quest.dungeon_seed);
+	else:
+		global.dungeon_seed = hash(quest.name);
+	global.current_floor = 1;
 
 func _on_HR_FetchTopics_request_completed(result, response_code, headers, body):
 	load_spinner.visible = false;

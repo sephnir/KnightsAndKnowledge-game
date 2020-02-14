@@ -33,6 +33,10 @@ var topics = null;
 var dungeon_rand = RandomNumberGenerator.new();
 var movement_rand = RandomNumberGenerator.new();
 
+## Quest instance variables
+var current_floor = 0;
+var dungeon_seed = "";
+
 func save_auth(auth):
 	_save_file(AUTH_PATH, auth);
 
