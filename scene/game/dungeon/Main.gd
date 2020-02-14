@@ -14,18 +14,19 @@ var player_inst;
 var player_pos = Vector2();
 
 onready var tile_size = global.DUNGEON_UNIT;
-var num_rooms = 20;
+var num_rooms = 40;
 var min_size = 6;
-var max_size = 14;
+var max_size = 8;
 var hspread = 20;
-var room_width = 2500;
-var room_height = 1500;
+var room_width = 3000;
+var room_height = 2000;
 var cull = 0.5;
 
 var velocity = Vector2(0,0);
 
 onready var tile = $TM_Overworld;
-var tile_solid_index = [1];
+var tile_solid_index = [1,2];
+var tile_open_index = [0];
 
 # A-star pathfinding
 var path; 
@@ -34,9 +35,14 @@ var start_room = null
 var end_room = null
 var play_mode = false  
 
+var open_tile_pos = [];
+
 func _ready():
 	randomize();
-	global.dungeon_rand.set_seed(hash(global.quest.dungeon_seed));
+	if(global.quest.dungeon_seed):
+		global.dungeon_rand.set_seed(hash(global.quest.dungeon_seed));
+	else:
+		global.dungeon_rand.set_seed(hash(global.quest.name));
 	global.movement_rand.set_seed(hash(global.quest.dungeon_seed));
 	make_rooms();
 	
@@ -79,6 +85,11 @@ func make_rooms():
 func populate_dungeon(tile):
 	#generate_items(tile);
 	generate_enemies(tile);
+	update_goal_pos();
+
+func update_goal_pos():
+	$Spr_Goal.position = Vector2(end_room.position.x, end_room.position.y);
+	$Spr_Goal.visible = true;
 
 func generate_enemies(tile):
 	var enemies_count = 0;
@@ -136,9 +147,9 @@ func find_mst(nodes):
 #Create a map of tiles
 func make_map():
 	# Create a TileMap from the generated rooms and path
-	tile.clear()
-	find_start_room()
-	find_end_room()
+	tile.clear();
+	find_start_room();
+	find_end_room();
 	
 	# Fill TileMap with walls, then carve empty rooms
 	var full_rect = Rect2()
@@ -161,6 +172,7 @@ func make_map():
 		for x in range(2, s.x * 2 - 1):
 			for y in range(2, s.y * 2 - 1):
 				tile.set_cell(ul.x + x, ul.y + y, 0)
+				open_tile_pos.append(Vector2(ul.x + x, ul.y + y));
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, 
 											room.position.y, 0))
@@ -172,7 +184,21 @@ func make_map():
 													path.get_point_position(conn).y))									
 				carve_path(start, end)
 		corridors.append(p)
+	make_wall();
 	path = null;
+
+#Create walls when top of an open cell is solid
+func make_wall():
+	for pos in open_tile_pos:
+		var temp_y = pos.y - 1;
+		var temp_y2 = pos.y -2;
+		if(tile.get_cell(pos.x, temp_y) in tile_solid_index):
+			if(tile.get_cell(pos.x, temp_y2) in tile_open_index):
+				# Remove single unit walls
+				tile.set_cell(pos.x, temp_y, 0);
+				open_tile_pos.append(Vector2(pos.x, temp_y));
+			else:
+				tile.set_cell(pos.x, temp_y, 2);
 
 #Remove all rooms instances (Used after generating tiles from room layouts)
 func clear_rooms():
@@ -184,22 +210,30 @@ func carve_path(pos1, pos2):
 	# Carve a path between two points
 	var x_diff = sign(pos2.x - pos1.x)
 	var y_diff = sign(pos2.y - pos1.y)
-	if x_diff == 0: x_diff = pow(-1.0, global.dungeon_rand.randi() % 2)
-	else: global.dungeon_rand.randi();
-	if y_diff == 0: y_diff = pow(-1.0, global.dungeon_rand.randi() % 2)
-	else: global.dungeon_rand.randi();
+	if x_diff == 0: 
+		x_diff = pow(-1.0, global.dungeon_rand.randi() % 2);
+	else: 
+		global.dungeon_rand.randi();
+	if y_diff == 0: 
+		y_diff = pow(-1.0, global.dungeon_rand.randi() % 2);
+	else: 
+		global.dungeon_rand.randi();
 	# choose either x/y or y/x
-	var x_y = pos1
-	var y_x = pos2
+	var x_y = pos1;
+	var y_x = pos2;
 	if (global.dungeon_rand.randi() % 2) > 0:
-		x_y = pos2
-		y_x = pos1
+		x_y = pos2;
+		y_x = pos1;
 	for x in range(pos1.x, pos2.x, x_diff):
-		tile.set_cell(x, x_y.y, 0)
-		tile.set_cell(x, x_y.y + y_diff, 0)  # widen the corridor
+		tile.set_cell(x, x_y.y, 0);
+		open_tile_pos.append(Vector2(x, x_y.y));
+		tile.set_cell(x, x_y.y + y_diff, 0); 
+		open_tile_pos.append(Vector2(x, x_y.y + y_diff));
 	for y in range(pos1.y, pos2.y, y_diff):
-		tile.set_cell(y_x.x, y, 0)
-		tile.set_cell(y_x.x + x_diff, y, 0)
+		tile.set_cell(y_x.x, y, 0);
+		open_tile_pos.append(Vector2(y_x.x, y));
+		tile.set_cell(y_x.x + x_diff, y, 0);
+		open_tile_pos.append(Vector2(y_x.x + x_diff, y));
 
 #Set the start position
 func find_start_room():
@@ -211,7 +245,7 @@ func find_start_room():
 
 #Set the goal position
 func find_end_room():
-	var max_x = -INF
+	var max_x = -INF;
 	for room in $Room.get_children():
 		if room.position.x > max_x:
 			end_room = room
