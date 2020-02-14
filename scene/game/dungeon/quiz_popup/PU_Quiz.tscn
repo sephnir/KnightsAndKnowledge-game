@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scene/game/dungeon/quiz_popup/Btn_Ans.tscn" type="PackedScene" id=1]
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scene/game/dungeon/quiz_popup/PU_Quiz.gd" type="Script" id=3]
 
 [node name="PU_Quiz" type="Popup"]
 anchor_left = 0.5
@@ -12,6 +14,7 @@ margin_top = -360.0
 margin_right = 640.0
 margin_bottom = 360.0
 popup_exclusive = true
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -37,6 +40,22 @@ margin_left = -561.0
 margin_top = 176.63
 margin_right = 562.0
 margin_bottom = 396.63
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lbl_Qns" type="Label" parent="Pnl_Bg/Pnl_Qns"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1114.0
+margin_bottom = 210.0
+rect_clip_content = true
+custom_fonts/font = ExtResource( 2 )
+text = "Test message"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

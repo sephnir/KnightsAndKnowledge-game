@@ -1,4 +1,7 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scene/game/dungeon/quiz_popup/Btn_Ans.gd" type="Script" id=2]
 
 [node name="Btn_Ans" type="Button"]
 anchor_left = 0.5
@@ -9,6 +12,10 @@ margin_left = -261.0
 margin_top = -48.0
 margin_right = 261.0
 margin_bottom = 48.0
+custom_fonts/font = ExtResource( 1 )
+text = "Test Answer"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="button_up" from="." to="." method="_on_Btn_Ans_button_up"]

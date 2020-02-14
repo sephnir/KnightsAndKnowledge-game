@@ -3,13 +3,13 @@
 [ext_resource path="res://scene/game/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://scene/component/character/character_display.tscn" type="PackedScene" id=2]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 ambient_light_color = Color( 0.752941, 0.752941, 0.752941, 1 )
 
-[sub_resource type="World" id=3]
-environment = SubResource( 2 )
+[sub_resource type="World" id=2]
+environment = SubResource( 1 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20, 20 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -28,7 +28,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 96, 64 )
 own_world = true
-world = SubResource( 3 )
+world = SubResource( 2 )
 transparent_bg = true
 handle_input_locally = false
 keep_3d_linear = true
@@ -38,7 +38,7 @@ render_target_update_mode = 3
 [node name="PlayerModel" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

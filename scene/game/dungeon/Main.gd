@@ -35,7 +35,7 @@ var end_room = null
 var play_mode = false  
 
 func _ready():
-	#randomize();
+	randomize();
 	global.dungeon_rand.set_seed(hash(global.quest.dungeon_seed));
 	global.movement_rand.set_seed(hash(global.quest.dungeon_seed));
 	make_rooms();
@@ -251,10 +251,20 @@ func update_entity_depth():
 	for p in $Player.get_children():
 		p.z_index = room_height/2 + p.position.y/10.0;
 
-#TODO - Moves enemy (grid-based)
 func move_enemy():
+	var p = $Player.get_children()[0];
 	for e in $Enemy.get_children():
 		e.move_random();
+		if(check_battle(p, e)):
+			battle(e);
+
+func check_battle(player, enemy):
+	var dist_x = abs(player.grid.x - enemy.grid_pos.x);
+	var dist_y = abs(player.grid.y - enemy.grid_pos.y);
+	return (dist_x + dist_y) <= 2;
+
+func battle(enemy):
+	$GUI/PU_Quiz.activate(enemy, [$GUI/Control/Analog]);
 
 #Called on every frame
 func _process(delta):

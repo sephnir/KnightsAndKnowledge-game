@@ -7,12 +7,14 @@ onready var grid_pos = Vector2();
 var momentum_grid = Vector2();
 var tilemap;
 var solid_tiles;
+var topic = -1;
 
 #Called when object ready
 func _ready():
 	grid_pos = position/unit;
 	grid_pos.x = floor(grid_pos.x);
 	grid_pos.y = floor(grid_pos.y);
+	topic = randi() % global.topics.size();
 
 #Contructor. Call when instancing
 func init(tilemap, solid_tiles, pos):
