@@ -268,6 +268,7 @@ func _draw():
 func move_player():
 	if(player_inst):
 		player_inst.velocity = $GUI/Control/Analog.velocity;
+		$Light2D.position = player_inst.position;
 		update_player_pos();
 		
 #Update in-game time when player moves to another grid
@@ -278,16 +279,20 @@ func update_player_pos():
 		move_enemy();
 		
 
-func update_entity_depth():
+func update_entity_var():
+	if(!$Player.get_children()):
+		return;
+	var p = $Player.get_children()[0];
+	p.z_index = room_height/2 + p.position.y/10.0;
 	for e in $Enemy.get_children():
 		e.z_index = room_height/2 + e.position.y/10.0;
-	for p in $Player.get_children():
-		p.z_index = room_height/2 + p.position.y/10.0;
+		e.dist_to_player = e.position.distance_to(p.position);
+		
 
 func move_enemy():
 	var p = $Player.get_children()[0];
 	for e in $Enemy.get_children():
-		e.move_random();
+		e.move_random(); 
 		if(check_battle(p, e)):
 			battle(e);
 
@@ -319,5 +324,5 @@ func battle(enemy):
 #Called on every frame
 func _process(delta):
 	move_player();
-	update_entity_depth();
+	update_entity_var();
 	update();

@@ -42,7 +42,13 @@ func _on_HR_FetchQuests_request_completed(result, response_code, headers, body):
 	if(json.result != null):
 		if(json.result.has("success")):
 			setup_list(json.result.success);
-
+			return;
+		if(json.result.has("error")):
+			$IL_Quest/Lbl_Notice.text = json.result.error;
+			$IL_Quest/Lbl_Notice.visible = true;
+			return;
+	$IL_Quest/Lbl_Notice.text = "Connection error, please try again.";
+	$IL_Quest/Lbl_Notice.visible = true;
 
 func _process(delta):
 	force_scroll_style();

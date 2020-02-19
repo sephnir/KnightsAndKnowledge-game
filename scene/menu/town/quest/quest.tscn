@@ -38,7 +38,7 @@ margin_top = -85.5
 margin_right = 291.5
 margin_bottom = 85.5
 custom_fonts/font = ExtResource( 2 )
-text = "No quests available in this guild."
+text = "Sample Text"
 align = 1
 autowrap = true
 __meta__ = {
@@ -73,6 +73,8 @@ text = "Select a quest"
 align = 1
 
 [node name="Pnl_QuestDesc" parent="." instance=ExtResource( 5 )]
+margin_top = 139.646
+margin_bottom = 699.646
 [connection signal="item_selected" from="IL_Quest" to="." method="_on_IL_Quest_item_selected"]
 [connection signal="button_up" from="Btn_Back" to="." method="_on_Btn_Back_button_up"]
 [connection signal="request_completed" from="HR_FetchQuests" to="." method="_on_HR_FetchQuests_request_completed"]

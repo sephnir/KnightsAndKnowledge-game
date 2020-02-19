@@ -8,6 +8,7 @@ var momentum_grid = Vector2();
 var tilemap;
 var solid_tiles;
 var topic = -1;
+var dist_to_player = 0;
 
 #Called when object ready
 func _ready():
@@ -44,6 +45,11 @@ func move_sprite():
 	if(position.distance_to(grid_pos * unit) > 1 ):
 		position += ((grid_pos * unit) - position ) / 5;
 
+func update_lighting():
+	var temp = clamp(1-dist_to_player/180+0.2,0,1);
+	modulate = Color(temp,temp,temp);
+
 #Called every frame
 func _process(delta):
 	move_sprite();
+	update_lighting();

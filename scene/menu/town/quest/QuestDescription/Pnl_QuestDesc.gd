@@ -34,4 +34,8 @@ func _on_HR_FetchTopics_request_completed(result, response_code, headers, body):
 	if(json.result != null):
 		if(json.result.has("success")):
 			global.topics = json.result.success;
-			get_tree().change_scene("res://scene/game/dungeon/main.tscn");
+			_change_room();
+
+func _change_room():
+	if(global.topics):
+		get_tree().change_scene("res://scene/game/dungeon/main.tscn");
