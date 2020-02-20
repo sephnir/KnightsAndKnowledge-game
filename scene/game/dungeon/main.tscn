@@ -16,6 +16,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id=2]
+storage = 1
 image = SubResource( 3 )
 size = Vector2( 256, 256 )
 
@@ -27,7 +28,6 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 1
 cell_y_sort = true
-compatibility_mode = true
 collision_use_kinematic = true
 format = 1
 
@@ -36,22 +36,22 @@ format = 1
 [node name="Light2D" type="Light2D" parent="."]
 texture = SubResource( 2 )
 texture_scale = 2.0
+range_height = 128.0
 range_z_min = -4096
 range_z_max = 4096
 shadow_enabled = true
-shadow_gradient_length = 1.0
-shadow_filter_smooth = 1.0
-
-[node name="Player" type="Node2D" parent="."]
-show_behind_parent = true
-light_mask = 2
+shadow_buffer_size = 64
+shadow_filter = 1
 
 [node name="Spr_Goal" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.141176, 0.117647, 0.117647, 1 )
+color = Color( 0.298039, 0.294118, 0.282353, 1 )
+
+[node name="Player" type="Node2D" parent="."]
+show_behind_parent = true
 
 [node name="Enemy" type="Node2D" parent="."]
 

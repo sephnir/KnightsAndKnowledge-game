@@ -46,7 +46,7 @@ func move_sprite():
 		position += ((grid_pos * unit) - position ) / 5;
 
 func update_lighting():
-	var temp = clamp(1-dist_to_player/180+0.2,0,1);
+	var temp = clamp(1-dist_to_player/180+0.2,0.1,1);
 	modulate = Color(temp,temp,temp);
 
 #Called every frame

@@ -25,8 +25,8 @@ var cull = 0.5;
 var velocity = Vector2(0,0);
 
 onready var tile = $TM_Overworld;
-var tile_solid_index = [1,2];
-var tile_open_index = [0];
+var tile_solid_index = [2,3];
+var tile_open_index = [0,1];
 
 # A-star pathfinding
 var path; 
@@ -96,8 +96,8 @@ func generate_enemies(tile):
 		for i in range(global.dungeon_rand.randi_range(0,5)):
 			var room_shape = r.get_node("CS_Room").shape.get_extents();
 			var rand_pos = Vector2(
-				global.dungeon_rand.randi_range(r.position.x,room_shape.x + r.position.x - tile_size),
-				global.dungeon_rand.randi_range(r.position.y,room_shape.y + r.position.y - tile_size));
+				global.dungeon_rand.randi_range(r.position.x,room_shape.x + r.position.x - tile_size*2),
+				global.dungeon_rand.randi_range(r.position.y,room_shape.y + r.position.y - tile_size*2));
 			
 			var enemy_inst = enemy.instance();
 			enemy_inst.init(tile, tile_solid_index, rand_pos);
@@ -148,7 +148,7 @@ func make_map():
 	find_start_room();
 	find_end_room();
 	
-	# Fill TileMap with walls, then carve empty rooms
+	# Fill TileMap with solid, then carve empty rooms
 	var full_rect = Rect2()
 	for room in $Room.get_children():
 		var r = Rect2(room.position-room.room_size,
@@ -158,7 +158,7 @@ func make_map():
 	var bottomright = tile.world_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			tile.set_cell(x, y, 1)	
+			tile.set_cell(x, y, 2)	
 	
 	# Carve rooms
 	var corridors = []  # One corridor per connection
@@ -168,7 +168,7 @@ func make_map():
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 - 1):
 			for y in range(2, s.y * 2 - 1):
-				tile.set_cell(ul.x + x, ul.y + y, 0)
+				tile.set_cell(ul.x + x, ul.y + y, get_rand_floor_ind())
 				open_tile_pos.append(Vector2(ul.x + x, ul.y + y));
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, 
@@ -192,10 +192,15 @@ func make_wall():
 		if(tile.get_cell(pos.x, temp_y) in tile_solid_index):
 			if(tile.get_cell(pos.x, temp_y2) in tile_open_index):
 				# Remove single unit walls
-				tile.set_cell(pos.x, temp_y, 0);
+				tile.set_cell(pos.x, temp_y, get_rand_floor_ind());
 				open_tile_pos.append(Vector2(pos.x, temp_y));
 			else:
-				tile.set_cell(pos.x, temp_y, 2);
+				tile.set_cell(pos.x, temp_y, 3);
+
+#Pick a random floor index from open_tile array
+func get_rand_floor_ind():
+	var tile_ind = randi() % tile_open_index.size();
+	return tile_open_index[tile_ind];
 
 #Remove all rooms instances (Used after generating tiles from room layouts)
 func clear_rooms():

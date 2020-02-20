@@ -56,11 +56,16 @@ func loop_anim():
 	elif anim == ANIM.WALK:
 		animplayer.play("walk");
 
+func fix_cam():
+	$Camera2D.position.x = floor($Camera2D.position.x + 0.5);
+	$Camera2D.position.y = floor($Camera2D.position.y + 0.5);
+
 #Called on every frame
 func _process(delta):
 	update_grid();
 	update_rotate();
-	loop_anim()
+	fix_cam();
+	loop_anim();
 
 #Called on every frame (For in-game physics processing)
 func _physics_process(delta):
