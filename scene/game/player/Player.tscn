@@ -23,6 +23,7 @@ script = ExtResource( 1 )
 self_modulate = Color( 1, 1, 1, 0.501961 )
 position = Vector2( 0, 20 )
 scale = Vector2( 1, 0.5 )
+z_index = -500
 texture = ExtResource( 3 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
@@ -58,4 +59,3 @@ current = true
 zoom = Vector2( 0.4, 0.4 )
 limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 8.0

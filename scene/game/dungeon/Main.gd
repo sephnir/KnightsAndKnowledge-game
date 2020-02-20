@@ -25,7 +25,7 @@ var cull = 0.5;
 var velocity = Vector2(0,0);
 
 onready var tile = $TM_Overworld;
-var tile_solid_index = [2,3];
+var tile_solid_index = [2,3,4];
 var tile_open_index = [0,1];
 
 # A-star pathfinding
@@ -36,6 +36,7 @@ var end_room = null
 var play_mode = false  
 
 var open_tile_pos = [];
+var wall_tile_pos = [];
 
 func _ready():
 	randomize();
@@ -151,14 +152,14 @@ func make_map():
 	# Fill TileMap with solid, then carve empty rooms
 	var full_rect = Rect2()
 	for room in $Room.get_children():
-		var r = Rect2(room.position-room.room_size,
+		var r = Rect2(room.position-room.room_size-Vector2(tile_size,tile_size),
 					room.get_node("CS_Room").shape.extents*2)
 		full_rect = full_rect.merge(r)
 	var topleft = tile.world_to_map(full_rect.position)
 	var bottomright = tile.world_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			tile.set_cell(x, y, 2)	
+			tile.set_cell(x, y, tile.get_tileset().find_tile_by_name("solid"))	
 	
 	# Carve rooms
 	var corridors = []  # One corridor per connection
@@ -180,22 +181,59 @@ func make_map():
 				var end = tile.world_to_map(Vector2(path.get_point_position(conn).x,
 													path.get_point_position(conn).y))									
 				carve_path(start, end)
-		corridors.append(p)
+		corridors.append(p);
+	cull_solid_col(4, 3);
 	make_wall();
+	make_border();
+	reapply_tile();
 	path = null;
+
+#Remove solid between 2 open-areas that are less than n and m solid apart
+func cull_solid_col(n, m):
+	for pos in open_tile_pos:
+		var check = 0;
+		for i in range(n):
+			var tmp = tile.get_cell(pos.x, pos.y-i-1);
+			if(!tmp in tile_solid_index && tmp!= -1):
+				for j in range(i):
+					# Replace solids
+					tile.set_cell(pos.x, pos.y-j-1, get_rand_floor_ind());
+					open_tile_pos.append(Vector2(pos.x, pos.y-j-1));
+				break;
+				
+		for i in range(m):
+			var tmp = tile.get_cell(pos.x-i-1, pos.y);
+			if(!tmp in tile_solid_index && tmp!= -1):
+				for j in range(i):
+					# Replace solids
+					tile.set_cell(pos.x-j-1, pos.y, get_rand_floor_ind());
+					open_tile_pos.append(Vector2(pos.x-j-1, pos.y));
+				break;
 
 #Create walls when top of an open cell is solid
 func make_wall():
 	for pos in open_tile_pos:
 		var temp_y = pos.y - 1;
-		var temp_y2 = pos.y -2;
 		if(tile.get_cell(pos.x, temp_y) in tile_solid_index):
-			if(tile.get_cell(pos.x, temp_y2) in tile_open_index):
-				# Remove single unit walls
-				tile.set_cell(pos.x, temp_y, get_rand_floor_ind());
-				open_tile_pos.append(Vector2(pos.x, temp_y));
-			else:
-				tile.set_cell(pos.x, temp_y, 3);
+			tile.set_cell(pos.x, temp_y, tile.get_tileset().find_tile_by_name("wall"));
+			wall_tile_pos.append(Vector2(pos.x, temp_y));
+
+#Make the border walls around the map
+func make_border():
+	for pos in (open_tile_pos + wall_tile_pos):
+		for i in range(-1,2):
+			for j in range(-1,2):
+				var tid = tile.get_cell(pos.x-i, pos.y-j);
+#				if(tid == tile.get_tileset().find_tile_by_name("solid")):
+				tile.set_cell(pos.x-i, pos.y-j, tile.get_tileset().find_tile_by_name("border"));
+	tile.update_bitmask_region();
+	
+#Reapply walls and ground
+func reapply_tile():
+	for pos in open_tile_pos:
+		tile.set_cell(pos.x, pos.y, get_rand_floor_ind());
+	for pos in wall_tile_pos:
+		tile.set_cell(pos.x, pos.y, tile.get_tileset().find_tile_by_name("wall"));
 
 #Pick a random floor index from open_tile array
 func get_rand_floor_ind():
@@ -229,12 +267,12 @@ func carve_path(pos1, pos2):
 	for x in range(pos1.x, pos2.x, x_diff):
 		tile.set_cell(x, x_y.y, 0);
 		open_tile_pos.append(Vector2(x, x_y.y));
-		tile.set_cell(x, x_y.y + y_diff, 0); 
+		tile.set_cell(x, x_y.y + y_diff, tile.get_tileset().find_tile_by_name("ground_l")); 
 		open_tile_pos.append(Vector2(x, x_y.y + y_diff));
 	for y in range(pos1.y, pos2.y, y_diff):
 		tile.set_cell(y_x.x, y, 0);
 		open_tile_pos.append(Vector2(y_x.x, y));
-		tile.set_cell(y_x.x + x_diff, y, 0);
+		tile.set_cell(y_x.x + x_diff, y, tile.get_tileset().find_tile_by_name("ground_l"));
 		open_tile_pos.append(Vector2(y_x.x + x_diff, y));
 
 #Set the start position
@@ -273,7 +311,8 @@ func _draw():
 func move_player():
 	if(player_inst):
 		player_inst.velocity = $GUI/Control/Analog.velocity;
-		$Light2D.position = player_inst.position;
+		$Light2D.position.x = player_inst.position.x;
+		$Light2D.position.y = player_inst.position.y+16;
 		update_player_pos();
 		
 #Update in-game time when player moves to another grid
