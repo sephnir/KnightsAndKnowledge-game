@@ -78,14 +78,14 @@ func _process(delta):
 	if(global.token != "" and global.token != null):
 		get_tree().change_scene("res://scene/character_select/character_select.tscn");
 	
-	if(timeout>0):
-		timeout -= 1;
-	elif(timeout==0):
-		timeout = -1;
-		$HR_Auth.cancel_request();
-		$HR_Login.cancel_request();
-		var error = '{"error":"Connection timeout.\nPlease try again."}';
-		_on_HR_Login_request_completed("timeout", 408, [], error.to_utf8());
+#	if(timeout>0):
+#		timeout -= 1;
+#	elif(timeout==0):
+#		timeout = -1;
+#		$HR_Auth.cancel_request();
+#		$HR_Login.cancel_request();
+#		var error = '{"error":"Connection timeout.\nPlease try again."}';
+#		_on_HR_Login_request_completed("timeout", 408, [], error.to_utf8());
 
 
 

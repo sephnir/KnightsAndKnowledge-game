@@ -283,6 +283,15 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="OccluderPolygon2D" id=31]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
+[sub_resource type="OccluderPolygon2D" id=32]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="OccluderPolygon2D" id=33]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="OccluderPolygon2D" id=34]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
 [sub_resource type="OccluderPolygon2D" id=35]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
@@ -290,7 +299,7 @@ polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=37]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygon = PoolVector2Array( 32, 0, 0, 0, 0, 32, 32, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=38]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -299,7 +308,7 @@ polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=40]
-polygon = PoolVector2Array( 32, 0, 0, 0, 0, 32, 32, 32 )
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=41]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -307,16 +316,7 @@ polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="OccluderPolygon2D" id=42]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="OccluderPolygon2D" id=43]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="OccluderPolygon2D" id=44]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="OccluderPolygon2D" id=45]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="VisualShader" id=58]
+[sub_resource type="VisualShader" id=43]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -342,10 +342,10 @@ mode = 1
 flags/light_only = false
 flags/unshaded = true
 
-[sub_resource type="ShaderMaterial" id=59]
-shader = SubResource( 58 )
+[sub_resource type="ShaderMaterial" id=44]
+shader = SubResource( 43 )
 
-[sub_resource type="OccluderPolygon2D" id=34]
+[sub_resource type="OccluderPolygon2D" id=45]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=46]
@@ -445,7 +445,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 4/name = "border"
 4/texture = ExtResource( 1 )
 4/tex_offset = Vector2( 0, 0 )
-4/material = SubResource( 59 )
+4/material = SubResource( 44 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 32, 128, 96 )
 4/tile_mode = 1
@@ -454,12 +454,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 4/autotile/icon_coordinate = Vector2( 0, 0 )
 4/autotile/tile_size = Vector2( 32, 32 )
 4/autotile/spacing = 0
-4/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 31 ), Vector2( 0, 1 ), SubResource( 35 ), Vector2( 0, 2 ), SubResource( 36 ), Vector2( 1, 0 ), SubResource( 37 ), Vector2( 1, 1 ), SubResource( 38 ), Vector2( 1, 2 ), SubResource( 39 ), Vector2( 2, 0 ), SubResource( 40 ), Vector2( 2, 1 ), SubResource( 41 ), Vector2( 2, 2 ), SubResource( 42 ), Vector2( 3, 0 ), SubResource( 43 ), Vector2( 3, 1 ), SubResource( 44 ), Vector2( 3, 2 ), SubResource( 45 ) ]
+4/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 31 ), Vector2( 0, 1 ), SubResource( 32 ), Vector2( 0, 2 ), SubResource( 33 ), Vector2( 1, 0 ), SubResource( 34 ), Vector2( 1, 1 ), SubResource( 35 ), Vector2( 1, 2 ), SubResource( 36 ), Vector2( 2, 0 ), SubResource( 37 ), Vector2( 2, 1 ), SubResource( 38 ), Vector2( 2, 2 ), SubResource( 39 ), Vector2( 3, 0 ), SubResource( 40 ), Vector2( 3, 1 ), SubResource( 41 ), Vector2( 3, 2 ), SubResource( 42 ) ]
 4/autotile/navpoly_map = [  ]
 4/autotile/priority_map = [  ]
 4/autotile/z_index_map = [  ]
 4/occluder_offset = Vector2( 0, 0 )
-4/occluder = SubResource( 34 )
+4/occluder = SubResource( 45 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shapes = [ {
 "autotile_coord": Vector2( 1, 0 ),

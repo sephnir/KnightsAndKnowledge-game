@@ -64,7 +64,7 @@ func fix_cam():
 func _process(delta):
 	update_grid();
 	update_rotate();
-	fix_cam();
+	#fix_cam();
 	loop_anim();
 
 #Called on every frame (For in-game physics processing)

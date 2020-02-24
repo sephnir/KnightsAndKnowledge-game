@@ -1,8 +1,9 @@
 extends Node
 
 # Constants
-#const HOSTNAME = "www.mocky.io/v2/5dbe8ce1330000ce20a0e3ec";
+#const HOSTNAME = "10.27.161.120";
 const HOSTNAME = "127.0.0.1";
+#const HOSTNAME = "192.168.43.40";
 #const HOSTNAME = "192.168.1.72";
 const PORT = 8000;
 

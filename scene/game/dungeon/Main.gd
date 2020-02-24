@@ -159,7 +159,7 @@ func make_map():
 	var bottomright = tile.world_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			tile.set_cell(x, y, tile.get_tileset().find_tile_by_name("solid"))	
+			tile.set_cellv(Vector2(x, y), tile.get_tileset().find_tile_by_name("solid"));
 	
 	# Carve rooms
 	var corridors = []  # One corridor per connection
@@ -169,8 +169,9 @@ func make_map():
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 - 1):
 			for y in range(2, s.y * 2 - 1):
-				tile.set_cell(ul.x + x, ul.y + y, get_rand_floor_ind())
-				open_tile_pos.append(Vector2(ul.x + x, ul.y + y));
+				var vec = Vector2(ul.x + x, ul.y + y);
+				tile.set_cellv(vec, get_rand_floor_ind());
+				open_tile_pos.append(vec);
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, 
 											room.position.y, 0))
@@ -193,47 +194,53 @@ func cull_solid_col(n, m):
 	for pos in open_tile_pos:
 		var check = 0;
 		for i in range(n):
-			var tmp = tile.get_cell(pos.x, pos.y-i-1);
+			var tmp = tile.get_cellv(Vector2(pos.x, pos.y-i-1));
 			if(!tmp in tile_solid_index && tmp!= -1):
 				for j in range(i):
 					# Replace solids
-					tile.set_cell(pos.x, pos.y-j-1, get_rand_floor_ind());
-					open_tile_pos.append(Vector2(pos.x, pos.y-j-1));
+					var vec = Vector2(pos.x, pos.y-j-1);
+					tile.set_cellv(vec, get_rand_floor_ind());
+					open_tile_pos.append(vec);
 				break;
 				
 		for i in range(m):
-			var tmp = tile.get_cell(pos.x-i-1, pos.y);
+			var tmp = tile.get_cellv(Vector2(pos.x-i-1, pos.y));
 			if(!tmp in tile_solid_index && tmp!= -1):
 				for j in range(i):
 					# Replace solids
-					tile.set_cell(pos.x-j-1, pos.y, get_rand_floor_ind());
-					open_tile_pos.append(Vector2(pos.x-j-1, pos.y));
+					var vec = Vector2(pos.x-j-1, pos.y);
+					tile.set_cellv(vec, get_rand_floor_ind());
+					open_tile_pos.append(vec);
 				break;
 
 #Create walls when top of an open cell is solid
 func make_wall():
 	for pos in open_tile_pos:
 		var temp_y = pos.y - 1;
-		if(tile.get_cell(pos.x, temp_y) in tile_solid_index):
-			tile.set_cell(pos.x, temp_y, tile.get_tileset().find_tile_by_name("wall"));
-			wall_tile_pos.append(Vector2(pos.x, temp_y));
+		var vec = Vector2(pos.x, temp_y);
+		if(tile.get_cellv(vec) in tile_solid_index):
+			tile.set_cellv(vec, tile.get_tileset().find_tile_by_name("wall"));
+			wall_tile_pos.append(vec);
 
 #Make the border walls around the map
 func make_border():
 	for pos in (open_tile_pos + wall_tile_pos):
 		for i in range(-1,2):
 			for j in range(-1,2):
-				var tid = tile.get_cell(pos.x-i, pos.y-j);
+				var vec = Vector2(pos.x-i, pos.y-j);
+				var tid = tile.get_cellv(vec);
 #				if(tid == tile.get_tileset().find_tile_by_name("solid")):
-				tile.set_cell(pos.x-i, pos.y-j, tile.get_tileset().find_tile_by_name("border"));
+				tile.set_cellv(vec, tile.get_tileset().find_tile_by_name("border"));
 	tile.update_bitmask_region();
 	
 #Reapply walls and ground
 func reapply_tile():
+	for pos in tile.get_used_cells_by_id(tile.get_tileset().find_tile_by_name("solid")):
+		tile.set_cellv(Vector2(pos.x, pos.y), -1);
 	for pos in open_tile_pos:
-		tile.set_cell(pos.x, pos.y, get_rand_floor_ind());
+		tile.set_cellv(Vector2(pos.x, pos.y), get_rand_floor_ind());
 	for pos in wall_tile_pos:
-		tile.set_cell(pos.x, pos.y, tile.get_tileset().find_tile_by_name("wall"));
+		tile.set_cellv(Vector2(pos.x, pos.y), tile.get_tileset().find_tile_by_name("wall"));
 
 #Pick a random floor index from open_tile array
 func get_rand_floor_ind():
@@ -265,15 +272,19 @@ func carve_path(pos1, pos2):
 		x_y = pos2;
 		y_x = pos1;
 	for x in range(pos1.x, pos2.x, x_diff):
-		tile.set_cell(x, x_y.y, 0);
-		open_tile_pos.append(Vector2(x, x_y.y));
-		tile.set_cell(x, x_y.y + y_diff, tile.get_tileset().find_tile_by_name("ground_l")); 
-		open_tile_pos.append(Vector2(x, x_y.y + y_diff));
+		var temp = Vector2(x, x_y.y);
+		tile.set_cellv(temp, 0);
+		open_tile_pos.append(temp);
+		temp = Vector2(x, x_y.y + y_diff);
+		tile.set_cellv(temp, tile.get_tileset().find_tile_by_name("ground_l")); 
+		open_tile_pos.append(temp);
 	for y in range(pos1.y, pos2.y, y_diff):
-		tile.set_cell(y_x.x, y, 0);
-		open_tile_pos.append(Vector2(y_x.x, y));
-		tile.set_cell(y_x.x + x_diff, y, tile.get_tileset().find_tile_by_name("ground_l"));
-		open_tile_pos.append(Vector2(y_x.x + x_diff, y));
+		var temp = Vector2(y_x.x, y);
+		tile.set_cellv(temp, 0);
+		open_tile_pos.append(temp);
+		temp = Vector2(y_x.x + x_diff, y);
+		tile.set_cellv(temp, tile.get_tileset().find_tile_by_name("ground_l"));
+		open_tile_pos.append(temp);
 
 #Set the start position
 func find_start_room():

@@ -20,7 +20,7 @@ extents = Vector2( 20, 20 )
 script = ExtResource( 1 )
 
 [node name="shadow" type="Sprite" parent="."]
-self_modulate = Color( 1, 1, 1, 0.501961 )
+self_modulate = Color( 1, 1, 1, 0.627451 )
 position = Vector2( 0, 20 )
 scale = Vector2( 1, 0.5 )
 z_index = -500

@@ -26,6 +26,11 @@ LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
 Global="*res://Global.gd"
 API="*res://API.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+settings/stdout/verbose_stdout=true
+
 [display]
 
 window/size/width=1280
@@ -54,6 +59,7 @@ mouse_left={
 quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=3
 quality/intended_usage/framebuffer_allocation.mobile=2
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 quality/shadows/filter_mode=0
 quality/reflections/texture_array_reflections=false

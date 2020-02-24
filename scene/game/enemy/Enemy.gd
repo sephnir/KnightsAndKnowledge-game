@@ -30,12 +30,14 @@ func move_random():
 	momentum_grid.y = clamp(momentum_grid.y + 
 		global.movement_rand.randi_range(-1, 1), -1, 1);
 	
-	if not tilemap.get_cell(grid_pos.x + momentum_grid.x, grid_pos.y) in solid_tiles:
+	var vec = Vector2(grid_pos.x + momentum_grid.x, grid_pos.y);
+	if not tilemap.get_cellv(vec) in solid_tiles:
 		grid_pos.x += momentum_grid.x;
 	else:
 		momentum_grid.x = -momentum_grid.x;
 	
-	if not tilemap.get_cell(grid_pos.x, grid_pos.y + momentum_grid.y) in solid_tiles:
+	vec = Vector2(grid_pos.x, grid_pos.y + momentum_grid.y);
+	if not tilemap.get_cellv(vec) in solid_tiles:
 		grid_pos.y += momentum_grid.y;
 	else:
 		momentum_grid.y = -momentum_grid.y;
