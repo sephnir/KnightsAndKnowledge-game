@@ -27,6 +27,7 @@ func init_global():
 	else:
 		global.dungeon_seed = hash(quest.name);
 	global.current_floor = 1;
+	global.current_hp = 6;
 
 func _on_HR_FetchTopics_request_completed(result, response_code, headers, body):
 	load_spinner.visible = false;

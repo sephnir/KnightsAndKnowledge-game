@@ -3,12 +3,16 @@ extends Popup
 onready var global = $"/root/Global";
 onready var ans_btn = [$Pnl_Bg/Btn_Ans, $Pnl_Bg/Btn_Ans2, 
 	$Pnl_Bg/Btn_Ans3, $Pnl_Bg/Btn_Ans4];
+var dungeon;
 
 var question_id = -1;
 var controls = [];
 var enemy = null;
 
 var correct_ind = -1;
+
+func _ready():
+	self.dungeon = find_parent("Dungeon");
 
 func activate(enemy, controls):
 	self.controls = controls;
@@ -49,4 +53,5 @@ func correct():
 	enemy.queue_free();
 	
 func wrong(btn):
+	get_parent().find_node("HP_Hud").damage();
 	btn.disabled = true;

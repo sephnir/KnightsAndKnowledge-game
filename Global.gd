@@ -36,6 +36,7 @@ var movement_rand = RandomNumberGenerator.new();
 
 ## Quest instance variables
 var current_floor = 0;
+var current_hp = 6;
 var dungeon_seed = "";
 
 func save_auth(auth):
