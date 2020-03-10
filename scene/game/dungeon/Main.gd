@@ -363,10 +363,10 @@ func check_goal():
 			next_level();
 
 func next_level():
-	if(global.current_floor >= global.quest.level):
+	global.current_floor += 1;
+	if(global.current_floor > global.quest.level):
 		quest_complete();
 	else:
-		global.current_floor += 1;
 		global.dungeon_seed = hash(str(global.dungeon_seed));
 		get_tree().change_scene("res://scene/game/dungeon/main.tscn");
 	
