@@ -9,16 +9,30 @@ var heart_size = 76;
 
 func damage():
 	global.current_hp -= 1;
+	if global.current_hp == 0:
+		get_tree().change_scene("res://scene/game/result/Result.tscn");
+	
 	update();
 
 func _draw():
-	for i in range(3):
-		draw_texture(heart_empty,Vector2(50 + i*(heart_size+16), 50));
-	
 	var ci = 0;
-	for i in range(global.current_hp /2):
-		draw_texture(heart_full,Vector2(50 + i*(heart_size+16), 50));
-		ci = i+1;
+	for i in range(3):
+		var hpRect = Rect2(Vector2(50 + i*(heart_size+16), 50), 
+			Vector2(heart_size, heart_size));
 		
+		if(global.current_hp/2 > i):
+			draw_texture_rect(heart_full, hpRect, false);
+			ci += 1;
+		else:
+			draw_texture_rect(heart_empty, hpRect, false);
+	
 	if(global.current_hp % 2 == 1):
-		draw_texture(heart_half,Vector2(50 + ci*(heart_size+16), 50));
+		var hpRectHalf = Rect2(Vector2(50 + ci*(heart_size+16), 50), 
+			Vector2(heart_size/2, heart_size));
+		draw_texture_rect(heart_half, hpRectHalf, false);
+#	var ci = 0;
+#	for i in range(global.current_hp /2):
+#		draw_texture(heart_full,Vector2(50 + i*(heart_size+16), 50));
+#		ci = i+1;
+		
+

@@ -371,7 +371,7 @@ func next_level():
 		get_tree().change_scene("res://scene/game/dungeon/main.tscn");
 	
 func quest_complete():
-	get_tree().change_scene("res://scene/menu/town/menu.tscn");
+	get_tree().change_scene("res://scene/game/result/Result.tscn");
 
 func battle(enemy):
 	$GUI/PU_Quiz.activate(enemy, [$GUI/Control/Analog]);

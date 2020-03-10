@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=1]
+[ext_resource path="res://font/Fancy.tres" type="DynamicFont" id=2]
+[ext_resource path="res://graphics/gui/result_screen/quest.png" type="Texture" id=3]
+[ext_resource path="res://scene/game/result/Result.gd" type="Script" id=4]
+[ext_resource path="res://font/Fancy_s.tres" type="DynamicFont" id=5]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quest" type="Sprite" parent="."]
+position = Vector2( 641.085, 330.687 )
+scale = Vector2( 3.14899, 2.83262 )
+texture = ExtResource( 3 )
+
+[node name="Btn_Return" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.0
+margin_top = 256.388
+margin_right = 130.0
+margin_bottom = 313.388
+custom_fonts/font = ExtResource( 1 )
+text = "Return to Map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lbl_Header" type="Label" parent="."]
+self_modulate = Color( 0.262745, 0.219608, 0.219608, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -374.0
+margin_top = 60.7242
+margin_right = 374.0
+margin_bottom = 186.724
+custom_fonts/font = ExtResource( 2 )
+text = "Game Over"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="Label" parent="."]
+self_modulate = Color( 0.262745, 0.219608, 0.219608, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -322.0
+margin_top = -176.617
+margin_right = 322.0
+margin_bottom = 128.383
+custom_fonts/font = ExtResource( 5 )
+text = "Sample Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="Btn_Return" to="." method="_on_Btn_Return_button_up"]
