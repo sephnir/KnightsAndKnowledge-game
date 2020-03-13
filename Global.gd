@@ -96,6 +96,13 @@ func get_request_url(route):
 	else:
 		return str("http://", HOSTNAME, ":", PORT, "/api/", route);
 
+# Form a CDN url
+func get_cdn_url(route):
+	if(PORT == 80 || PORT == 0):
+		return str("http://", HOSTNAME, "/storage/sprite/", route);
+	else:
+		return str("http://", HOSTNAME, ":", PORT, "/storage/sprite/", route);
+
 # Form authorization strings for request header
 func get_bearer():
 	return "Authorization: Bearer " + token;

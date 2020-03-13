@@ -16,6 +16,8 @@ __meta__ = {
 
 [node name="HR_FetchTopics" type="HTTPRequest" parent="."]
 
+[node name="HR_FetchSprites" type="HTTPRequest" parent="."]
+
 [node name="Lbl_Title" type="Label" parent="."]
 margin_right = 477.0
 margin_bottom = 74.0
@@ -61,4 +63,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="request_completed" from="HR_FetchTopics" to="." method="_on_HR_FetchTopics_request_completed"]
+[connection signal="request_completed" from="HR_FetchSprites" to="." method="_on_HR_FetchSprites_request_completed"]
 [connection signal="button_up" from="Btn_Depart" to="." method="_on_Btn_Depart_button_up"]

@@ -13,6 +13,9 @@ onready var routes = $"/root/API";
 var player_inst;
 var player_pos = Vector2();
 
+var enemy_sprites = [];
+var topic_size = 0;
+
 onready var tile_size = global.DUNGEON_UNIT;
 var num_rooms = 40;
 var min_size = 6;
@@ -40,6 +43,7 @@ var wall_tile_pos = [];
 
 func _ready():
 	randomize();
+	fetch_sprites();
 	global.dungeon_rand.set_seed(hash(global.dungeon_seed));
 	global.movement_rand.set_seed(hash(global.dungeon_seed));
 	make_rooms();
@@ -49,6 +53,11 @@ func _signal_room_created():
 	setup_player_inst();
 	populate_dungeon(tile);
 	clear_rooms();
+
+func fetch_sprites():
+	for topic in global.topics:
+		var request_url = global.get_cdn_url(topic.sprite_path);
+		$HR_SprLoader.request(request_url);
 
 #Create layout of rooms
 func make_rooms():

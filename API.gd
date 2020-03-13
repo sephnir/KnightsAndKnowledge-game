@@ -14,3 +14,5 @@ const API_GUILD_SHOW = "guild/details";
 const API_QUEST_LIST = "quest/list";
 
 const API_TOPIC_QUESTION_LIST = "topic/list";
+
+const CDN_SPRITE = "sprite"

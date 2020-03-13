@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var global = get_node("/root/Global");
+onready var parent = find_parent('Dungeon');
 onready var unit = global.DUNGEON_UNIT;
 onready var grid_pos = Vector2();
 
@@ -16,6 +17,11 @@ func _ready():
 	grid_pos.x = floor(grid_pos.x);
 	grid_pos.y = floor(grid_pos.y);
 	topic = randi() % global.topics.size();
+	load_sprite();
+
+func load_sprite():
+	$Spr_Enemy.texture = global.topics[topic].sprite_tex;
+	update();
 
 #Contructor. Call when instancing
 func init(tilemap, solid_tiles, pos):

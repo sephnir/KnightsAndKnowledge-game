@@ -56,6 +56,9 @@ show_behind_parent = true
 
 [node name="Enemy" type="Node2D" parent="."]
 
+[node name="HR_SprLoader" type="HTTPRequest" parent="."]
+use_threads = true
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="GUI" instance=ExtResource( 3 )]
@@ -69,3 +72,4 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="request_completed" from="HR_SprLoader" to="." method="_on_HR_SprLoader_request_completed"]
