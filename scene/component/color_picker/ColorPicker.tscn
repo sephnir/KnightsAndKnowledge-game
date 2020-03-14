@@ -1,0 +1,30 @@
+[gd_scene format=2]
+
+[node name="ColorPicker" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -964.0
+margin_bottom = -434.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pnl_Padding" type="Panel" parent="."]
+margin_right = 315.0
+margin_bottom = 289.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CP_Select" type="ColorPicker" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = 4.0
+edit_alpha = false
+presets_enabled = false
+presets_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

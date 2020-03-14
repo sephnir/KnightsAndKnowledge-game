@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scene/character_select/profile_box/profile_box.gd" type="Script" id=1]
 [ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=2]
 [ext_resource path="res://graphics/gui/character_select/plus.png" type="Texture" id=3]
 [ext_resource path="res://scene/component/character/character_display.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scene/character_select/profile_box/PU_Create.gd" type="Script" id=5]
+
+[sub_resource type="Environment" id=1]
+ambient_light_color = Color( 0.752941, 0.752941, 0.752941, 1 )
+
+[sub_resource type="World" id=2]
+environment = SubResource( 1 )
 
 [node name="Btn_Profile" type="Button"]
 margin_right = 300.0
@@ -37,18 +43,21 @@ margin_right = 270.0
 margin_bottom = 262.0
 mouse_filter = 1
 stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Viewport" type="Viewport" parent="VpC_Character"]
 size = Vector2( 240, 240 )
 own_world = true
+world = SubResource( 2 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Spatial" parent="VpC_Character/Viewport" instance=ExtResource( 4 )]
+[node name="PlayerModel" parent="VpC_Character/Viewport" instance=ExtResource( 4 )]
 
 [node name="PU_Create" type="Popup" parent="."]
-visible = true
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 510.0

@@ -52,6 +52,7 @@ margin_right = 940.0
 margin_bottom = 400.0
 
 [node name="Cpn_Loading" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -133.897, -58.7191 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]

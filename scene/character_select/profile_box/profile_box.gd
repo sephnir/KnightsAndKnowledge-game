@@ -9,12 +9,18 @@ var experience = 0;
 var money = 0;
 var global;
 
+var animTimer = 0;
+onready var animplayer = $VpC_Character/Viewport/PlayerModel/Model/AnimationPlayer;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global = get_node("/root/Global");
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	animTimer = fmod(animTimer + 0.02, 360); 
+	$VpC_Character/Viewport/PlayerModel/Model.rotation.y = animTimer;
+	animplayer.play("walk");
 	
 	get_node("Lbl_Name").text = charName;
 	if(charId >= 0):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/receptionist.png-0468e201d6796be72e02f7c65a82235b.stex"
+path="res://.import/blacksmith.jpg-f2287a671eb3f012cb10191227a976ff.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/sprite/receptionist.png"
-dest_files=[ "res://.import/receptionist.png-0468e201d6796be72e02f7c65a82235b.stex" ]
+source_file="res://graphics/bg/blacksmith/blacksmith.jpg"
+dest_files=[ "res://.import/blacksmith.jpg-f2287a671eb3f012cb10191227a976ff.stex" ]
 
 [params]
 

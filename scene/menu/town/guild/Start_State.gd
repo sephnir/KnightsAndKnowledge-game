@@ -1,9 +1,6 @@
 extends Control
 
-var guild = find_parent("Guild");
-
-func _ready():
-	guild = find_parent("Guild");
+onready var guild = find_parent("Guild");
 
 func _process(delta):
 	if(guild):

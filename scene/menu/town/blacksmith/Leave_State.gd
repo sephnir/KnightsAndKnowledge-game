@@ -1,10 +1,10 @@
 extends Control
 
-onready var guild = find_parent("Guild");
+onready var blacksmith = find_parent("Blacksmith");
 
 func _process(delta):
-	if(guild):
-		if(guild.state == guild.GUILD_STATE.LEAVE):
+	if(blacksmith):
+		if(blacksmith.state == blacksmith.BLACKSMITH_STATE.LEAVE):
 			visible = true;
 		else:
 			visible = false;
