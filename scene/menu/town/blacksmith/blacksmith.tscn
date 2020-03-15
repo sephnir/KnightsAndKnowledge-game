@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://graphics/sprite/blacksmith.png" type="Texture" id=1]
 [ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scene/menu/town/blacksmith/Leave_State.gd" type="Script" id=8]
 [ext_resource path="res://scene/component/loading_screen/loading_screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/component/color_picker/ColorPicker.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scene/menu/town/blacksmith/Select_State.gd" type="Script" id=11]
 
 [node name="Blacksmith" type="Control"]
 anchor_right = 1.0
@@ -54,20 +55,7 @@ __meta__ = {
 }
 
 [node name="Start_State" type="Control" parent="."]
-visible = false
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Btn_Join" type="Button" parent="Start_State"]
-margin_left = 80.0
-margin_top = 120.0
-margin_right = 720.0
-margin_bottom = 200.0
-rect_pivot_offset = Vector2( 230, 20 )
-custom_fonts/font = ExtResource( 2 )
-text = "Join Guild"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -79,7 +67,7 @@ margin_right = 720.0
 margin_bottom = 310.0
 rect_pivot_offset = Vector2( 230, 20 )
 custom_fonts/font = ExtResource( 2 )
-text = "Previously Joined Guild"
+text = "Change Armor Color"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -144,9 +132,9 @@ custom_fonts/font = ExtResource( 2 )
 text = "Back"
 
 [node name="Select_State" type="Control" parent="."]
-visible = false
 margin_right = 1280.0
 margin_bottom = 719.0
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,16 +163,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IL_Guilds" type="ItemList" parent="Select_State"]
-margin_left = 80.0
-margin_top = 108.0
-margin_right = 720.0
-margin_bottom = 368.0
-rect_min_size = Vector2( 640, 260 )
-custom_fonts/font = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ColorPicker" parent="Select_State" instance=ExtResource( 10 )]
+margin_left = 473.557
+margin_top = 370.202
+margin_right = -490.443
+margin_bottom = -63.7981
+rect_rotation = 180.0
+rect_scale = Vector2( 1.25, 1.25 )
 
 [node name="Leave_State" type="Control" parent="."]
 visible = false
@@ -205,14 +190,6 @@ __meta__ = {
 
 [node name="Cpn_Loading" parent="." instance=ExtResource( 9 )]
 visible = false
-
-[node name="ColorPicker" parent="." instance=ExtResource( 10 )]
-margin_left = 79.3883
-margin_top = 30.3122
-margin_right = -884.612
-margin_bottom = -403.688
-rect_scale = Vector2( 1.5, 1.5 )
-[connection signal="button_up" from="Start_State/Btn_Join" to="." method="_on_Btn_Join_button_up"]
 [connection signal="button_up" from="Start_State/Btn_Select" to="." method="_on_Btn_Select_button_up"]
 [connection signal="button_up" from="Start_State/Btn_Leave" to="." method="_on_Btn_Leave_button_up"]
 [connection signal="request_completed" from="Join_State/HR_JoinGuild" to="Join_State" method="_on_HR_JoinGuild_request_completed"]

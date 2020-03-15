@@ -4,9 +4,9 @@ const MSG_DICT = {
 	"start": "Hey young'n! Y'need anythin'?\n",
 	"restart": "Anythin' else?\n",
 	
-	"select": "Please select the guild that you want to participate in.\n",
-	"select_success": "You have selected %s!\n",
-	"select_fail": "There are no guilds listed. Please try again if you have joined a guild before.\n",
+	"select": "Select a color fer yer armor.\n",
+	"select_success": "Here ya go!\n",
+	"select_fail": "\n",
 	
 	"leave": "Be seein' ye!\n",
 	

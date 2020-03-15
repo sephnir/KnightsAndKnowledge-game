@@ -17,10 +17,6 @@ onready var routes = $"/root/API";
 func _ready():
 	pass # Replace with function body.
 
-func _on_Btn_Join_button_up():
-	label.text = label.MSG_DICT["join"]
-	state = BLACKSMITH_STATE.JOIN;
-
 func _on_Btn_Select_button_up():
 	label.text = label.MSG_DICT["select"]
 	state = BLACKSMITH_STATE.SELECT;

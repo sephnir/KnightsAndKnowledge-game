@@ -13,15 +13,16 @@ __meta__ = {
 [node name="Pnl_Padding" type="Panel" parent="."]
 margin_right = 315.0
 margin_bottom = 289.0
+rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CP_Select" type="ColorPicker" parent="."]
-margin_left = 4.0
+[node name="CP_Select" type="ColorPicker" parent="Pnl_Padding"]
+margin_left = 3.04999
 margin_top = 4.0
-margin_right = 4.0
-margin_bottom = 4.0
+margin_right = 311.05
+margin_bottom = 438.0
 edit_alpha = false
 presets_enabled = false
 presets_visible = false

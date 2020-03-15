@@ -38,7 +38,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 96, 64 )
+size = Vector2( 192, 128 )
 own_world = true
 world = SubResource( 3 )
 transparent_bg = true

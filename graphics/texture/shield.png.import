@@ -2,22 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.s3tc.stex"
-path.etc2="res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.etc2.stex"
-path.etc="res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.etc.stex"
+path="res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://graphics/texture/shield.png"
-dest_files=[ "res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.s3tc.stex", "res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.etc2.stex", "res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.etc.stex" ]
+dest_files=[ "res://.import/shield.png-b28c7cb899574fc55a45f59f8125f2ad.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
