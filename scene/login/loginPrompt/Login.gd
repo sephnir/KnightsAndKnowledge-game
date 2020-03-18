@@ -41,13 +41,16 @@ func _on_HR_Login_request_completed(result, response_code, headers, body ):
 	
 	if(json.result != null):
 		if(json.result.has("error")):
-			$PP_Notice/Lbl_Notice.set_text(str(json.result.error));
+			var error_msg = str(json.result.error);
+			if(str(json.result.error) == "invalid_grant"):
+				error_msg = "Invalid credentials";
+			
+			$PP_Notice/Lbl_Notice.set_text(error_msg);
 			$PP_Notice.popup_centered();
 			
-		if(json.result.has("success")):
-			if(json.result.success.has("token")):
-				global.token = json.result.success.token;
-				global.save_auth(global.token);
+		if(json.result.has("access_token")):
+			global.token = json.result.access_token;
+			global.save_auth(global.token);
 	else:
 		$PP_Notice/Lbl_Notice.set_text("Unable to connect to server.");
 		$PP_Notice.popup_centered();
@@ -63,16 +66,22 @@ func _on_Btn_Login_button_up():
 		"Content-Type: application/json", 
 		"Accept: application/json"
 	]
-	var email = $LE_Email.text;
+	var username = $LE_Email.text;
 	var password = $LE_Password.text
-	var query = build_form_data(email, password);
+	var query = build_form_data(username, password);
 	$HR_Login.request(request_url, headers, false, HTTPClient.METHOD_POST, query);
 	timeout = global.CONNECTION_TIMEOUT;
 	$Btn_Login.disabled = true;
 	$Cpn_Loading.visible = true;
 
 func build_form_data(email, password):
-	return to_json({"email": email, "password": password});
+	return to_json({
+		"grant_type": "password",
+		"client_id": global.CLIENT_ID,
+		"client_secret": global.CLIENT_GRANT,
+		"username": email, 
+		"password": password}
+	);
 	
 func _process(delta):
 	if(global.token != "" and global.token != null):

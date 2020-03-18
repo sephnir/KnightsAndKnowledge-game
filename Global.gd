@@ -14,6 +14,9 @@ const DUNGEON_UNIT = 32;
 const AUTH_PATH = "user://auth.data";
 const GUILD_PATH = "user://guild.data";
 
+const CLIENT_ID = 1;
+const CLIENT_GRANT = "TzzipodhcJHdkv8bhIC37st3z9MBKn94MRRtw1Tw";
+
 # Global variables
 var token = "";
 
@@ -92,9 +95,9 @@ func _load_file(path):
 # Form a request url
 func get_request_url(route):
 	if(PORT == 80 || PORT == 0):
-		return str("http://", HOSTNAME, "/api/", route);
+		return str("http://", HOSTNAME, route);
 	else:
-		return str("http://", HOSTNAME, ":", PORT, "/api/", route);
+		return str("http://", HOSTNAME, ":", PORT, route);
 
 # Form a CDN url
 func get_cdn_url(route):
