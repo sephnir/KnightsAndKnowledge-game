@@ -50,6 +50,7 @@ func correct():
 	for item in ans_btn:
 		item.disabled = false;
 	visible = false;
+	global.score += 100;
 	enemy.queue_free();
 	
 func wrong(btn):

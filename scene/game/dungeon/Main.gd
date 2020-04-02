@@ -6,6 +6,7 @@ extends Node2D
 var room = preload("res://scene/game/dungeon/room/room.tscn");
 var player = preload("res://scene/game/player/Player.tscn");
 var enemy = preload("res://scene/game/enemy/Enemy.tscn");
+var item = preload("res://scene/game/item/Item.tscn");
 
 onready var global = $"/root/Global";
 onready var routes = $"/root/API";
@@ -90,13 +91,30 @@ func make_rooms():
 
 #TODO - Populate dungeon with enemies and chests
 func populate_dungeon(tile):
-	#generate_items(tile);
+	generate_items(tile);
 	generate_enemies(tile);
 	update_goal_pos();
 
 func update_goal_pos():
 	$Spr_Goal.position = Vector2(end_room.position.x, end_room.position.y);
 	$Spr_Goal.visible = true;
+
+func generate_items(tile):
+	var item_count = 0;
+	for r in $Room.get_children():
+		if r == start_room: continue;
+		
+		for i in range(global.dungeon_rand.randi_range(0,1)):
+			var room_shape = r.get_node("CS_Room").shape.get_extents();
+			var rand_pos = Vector2(
+				global.dungeon_rand.randi_range(r.position.x,room_shape.x + r.position.x - tile_size*2),
+				global.dungeon_rand.randi_range(r.position.y,room_shape.y + r.position.y - tile_size*2));
+				
+			var item_inst = item.instance();
+			item_inst.init(rand_pos);
+			$Item.add_child(item_inst);
+			item_count += 1;
+			
 
 func generate_enemies(tile):
 	var enemies_count = 0;
@@ -113,7 +131,7 @@ func generate_enemies(tile):
 			enemy_inst.init(tile, tile_solid_index, rand_pos);
 			$Enemy.add_child(enemy_inst);
 			enemies_count += 1;
-	pass;
+
 #Initialize player instance
 func setup_player_inst():
 	player_inst = player.instance();
@@ -339,7 +357,9 @@ func move_player():
 func update_player_pos():
 	if(player_pos != player_inst.grid):
 		player_pos = player_inst.grid;
+		global.score = max(global.score-1, 0);
 		check_goal();
+		check_item();
 		move_enemy();
 		
 
@@ -351,7 +371,9 @@ func update_entity_var():
 	for e in $Enemy.get_children():
 		e.z_index = room_height/2 + e.position.y/10.0;
 		e.dist_to_player = e.position.distance_to(p.position);
-		
+	for i in $Item.get_children():
+		i.z_index = room_height/2 + i.position.y/10.0;
+		i.dist_to_player = i.position.distance_to(p.position);
 
 func move_enemy():
 	var p = $Player.get_children()[0];
@@ -370,6 +392,14 @@ func check_goal():
 	if (player.grid.x == floor($Spr_Goal.position.x/ tile_size) ):
 		if (player.grid.y == floor($Spr_Goal.position.y/ tile_size) ):
 			next_level();
+
+func check_item():
+	var player = $Player.get_children()[0];
+	for i in $Item.get_children():
+		var dist_x = abs(player.grid.x - i.grid_pos.x);
+		var dist_y = abs(player.grid.y - i.grid_pos.y);
+		if (dist_x + dist_y) == 0:
+			i.collect();
 
 func next_level():
 	global.current_floor += 1;

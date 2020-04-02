@@ -17,6 +17,8 @@ const GUILD_PATH = "user://guild.data";
 const CLIENT_ID = 1;
 const CLIENT_GRANT = "TzzipodhcJHdkv8bhIC37st3z9MBKn94MRRtw1Tw";
 
+const MAX_HP = 6;
+
 # Global variables
 var token = "";
 
@@ -39,8 +41,9 @@ var movement_rand = RandomNumberGenerator.new();
 
 ## Quest instance variables
 var current_floor = 0;
-var current_hp = 6;
+var current_hp = MAX_HP;
 var dungeon_seed = "";
+var score = 3000;
 
 func save_auth(auth):
 	_save_file(AUTH_PATH, auth);

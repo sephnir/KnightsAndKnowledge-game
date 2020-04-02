@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=60 format=2]
+[gd_resource type="TileSet" load_steps=58 format=2]
 
 [ext_resource path="res://graphics/tiles/tileset.png" type="Texture" id=1]
 [ext_resource path="res://graphics/normal/tileset_n.png" type="Texture" id=2]
@@ -47,42 +47,36 @@ default_input_values = [ 0, 0.9, 1, 0.0 ]
 operator = 2
 
 [sub_resource type="VisualShaderNodeInput" id=15]
-input_name = "normal_texture"
-
-[sub_resource type="VisualShaderNodeTexture" id=16]
-source = 3
-
-[sub_resource type="VisualShaderNodeInput" id=17]
 input_name = "texture"
 
-[sub_resource type="VisualShaderNodeTexture" id=18]
+[sub_resource type="VisualShaderNodeTexture" id=16]
 source = 2
 
-[sub_resource type="VisualShaderNodeVectorOp" id=19]
+[sub_resource type="VisualShaderNodeVectorOp" id=17]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 5, 5, 5 ) ]
 operator = 3
 
-[sub_resource type="VisualShaderNodeInput" id=20]
+[sub_resource type="VisualShaderNodeInput" id=18]
 input_name = "light_vec"
 
-[sub_resource type="VisualShaderNodeVectorDecompose" id=21]
+[sub_resource type="VisualShaderNodeVectorDecompose" id=19]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=22]
+[sub_resource type="VisualShaderNodeScalarOp" id=20]
 default_input_values = [ 0, 0.0, 1, 1.0 ]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=23]
+[sub_resource type="VisualShaderNodeScalarOp" id=21]
 default_input_values = [ 0, 0.0, 1, 1.0 ]
 operator = 3
 
-[sub_resource type="VisualShaderNodeVectorCompose" id=24]
+[sub_resource type="VisualShaderNodeVectorCompose" id=22]
 
-[sub_resource type="VisualShaderNodeScalarOp" id=25]
+[sub_resource type="VisualShaderNodeScalarOp" id=23]
 default_input_values = [ 0, 1.0, 1, 0.0 ]
 operator = 1
 
-[sub_resource type="VisualShaderNodeVectorFunc" id=26]
+[sub_resource type="VisualShaderNodeVectorFunc" id=24]
 
-[sub_resource type="VisualShader" id=27]
+[sub_resource type="VisualShader" id=25]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -213,17 +207,17 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -91.4639, 148.208 )
+graph_offset = Vector2( -260, 162 )
 mode = 1
 flags/light_only = false
 flags/unshaded = true
 nodes/vertex/0/position = Vector2( 225, 118 )
 nodes/fragment/0/position = Vector2( 780, 100 )
-nodes/fragment/3/node = SubResource( 17 )
+nodes/fragment/3/node = SubResource( 15 )
 nodes/fragment/3/position = Vector2( -464.4, 121.5 )
-nodes/fragment/4/node = SubResource( 18 )
+nodes/fragment/4/node = SubResource( 16 )
 nodes/fragment/4/position = Vector2( -290.4, 40.5 )
-nodes/fragment/5/node = SubResource( 19 )
+nodes/fragment/5/node = SubResource( 17 )
 nodes/fragment/5/position = Vector2( 0, 100 )
 nodes/fragment/10/node = SubResource( 3 )
 nodes/fragment/10/position = Vector2( -980, 420 )
@@ -249,36 +243,38 @@ nodes/fragment/25/node = SubResource( 13 )
 nodes/fragment/25/position = Vector2( -560, 420 )
 nodes/fragment/26/node = SubResource( 14 )
 nodes/fragment/26/position = Vector2( 240, 220 )
-nodes/fragment/27/node = SubResource( 15 )
-nodes/fragment/27/position = Vector2( 200, 380 )
-nodes/fragment/28/node = SubResource( 16 )
-nodes/fragment/28/position = Vector2( 459.536, 270.208 )
-nodes/fragment/connections = PoolIntArray( 3, 0, 4, 2, 4, 0, 5, 0, 5, 0, 11, 0, 12, 0, 10, 0, 11, 0, 0, 0, 20, 0, 19, 0, 18, 0, 20, 0, 10, 0, 20, 1, 19, 0, 17, 0, 10, 1, 22, 0, 23, 0, 17, 1, 18, 0, 24, 0, 24, 0, 23, 0, 22, 0, 25, 0, 25, 0, 24, 1, 26, 0, 11, 1, 17, 0, 26, 1, 27, 0, 28, 2 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 4, 2, 4, 0, 5, 0, 5, 0, 11, 0, 12, 0, 10, 0, 11, 0, 0, 0, 20, 0, 19, 0, 18, 0, 20, 0, 10, 0, 20, 1, 19, 0, 17, 0, 10, 1, 22, 0, 23, 0, 17, 1, 18, 0, 24, 0, 24, 0, 23, 0, 22, 0, 25, 0, 25, 0, 24, 1, 26, 0, 11, 1, 17, 0, 26, 1 )
 nodes/light/0/position = Vector2( 1100, 80 )
-nodes/light/2/node = SubResource( 20 )
+nodes/light/2/node = SubResource( 18 )
 nodes/light/2/position = Vector2( -398, 117 )
-nodes/light/3/node = SubResource( 21 )
+nodes/light/3/node = SubResource( 19 )
 nodes/light/3/position = Vector2( 40, 120 )
-nodes/light/5/node = SubResource( 22 )
+nodes/light/5/node = SubResource( 20 )
 nodes/light/5/position = Vector2( 260, 160 )
-nodes/light/6/node = SubResource( 23 )
+nodes/light/6/node = SubResource( 21 )
 nodes/light/6/position = Vector2( 440, 140 )
-nodes/light/7/node = SubResource( 24 )
+nodes/light/7/node = SubResource( 22 )
 nodes/light/7/position = Vector2( 840, -20 )
-nodes/light/8/node = SubResource( 25 )
+nodes/light/8/node = SubResource( 23 )
 nodes/light/8/position = Vector2( 640, 40 )
-nodes/light/9/node = SubResource( 26 )
+nodes/light/9/node = SubResource( 24 )
 nodes/light/9/position = Vector2( -185, 114 )
 nodes/light/connections = PoolIntArray( 3, 1, 5, 0, 5, 0, 6, 0, 7, 0, 0, 0, 6, 0, 8, 1, 8, 0, 7, 0, 8, 0, 7, 1, 8, 0, 7, 2, 2, 0, 9, 0, 9, 0, 3, 0 )
 
-[sub_resource type="ShaderMaterial" id=28]
-shader = SubResource( 27 )
+[sub_resource type="ShaderMaterial" id=26]
+shader = SubResource( 25 )
+
+[sub_resource type="OccluderPolygon2D" id=27]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=28]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=29]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=30]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+[sub_resource type="OccluderPolygon2D" id=30]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=31]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -293,13 +289,13 @@ polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=35]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygon = PoolVector2Array( 32, 0, 0, 0, 0, 32, 32, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=36]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=37]
-polygon = PoolVector2Array( 32, 0, 0, 0, 0, 32, 32, 32 )
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="OccluderPolygon2D" id=38]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -310,13 +306,7 @@ polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="OccluderPolygon2D" id=40]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
-[sub_resource type="OccluderPolygon2D" id=41]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="OccluderPolygon2D" id=42]
-polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="VisualShader" id=43]
+[sub_resource type="VisualShader" id=41]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -342,11 +332,17 @@ mode = 1
 flags/light_only = false
 flags/unshaded = true
 
-[sub_resource type="ShaderMaterial" id=44]
-shader = SubResource( 43 )
+[sub_resource type="ShaderMaterial" id=42]
+shader = SubResource( 41 )
 
-[sub_resource type="OccluderPolygon2D" id=45]
+[sub_resource type="OccluderPolygon2D" id=43]
 polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=44]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=45]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=46]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -376,12 +372,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=55]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=56]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="ConvexPolygonShape2D" id=57]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [resource]
@@ -427,25 +417,25 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 3/name = "wall"
 3/texture = ExtResource( 1 )
 3/tex_offset = Vector2( 0, 0 )
-3/material = SubResource( 28 )
+3/material = SubResource( 26 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 96, 0, 32, 32 )
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
-3/occluder = SubResource( 29 )
+3/occluder = SubResource( 27 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 30 ),
+"shape": SubResource( 28 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
 4/name = "border"
 4/texture = ExtResource( 1 )
 4/tex_offset = Vector2( 0, 0 )
-4/material = SubResource( 44 )
+4/material = SubResource( 42 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 0, 32, 128, 96 )
 4/tile_mode = 1
@@ -454,84 +444,84 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 4/autotile/icon_coordinate = Vector2( 0, 0 )
 4/autotile/tile_size = Vector2( 32, 32 )
 4/autotile/spacing = 0
-4/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 31 ), Vector2( 0, 1 ), SubResource( 32 ), Vector2( 0, 2 ), SubResource( 33 ), Vector2( 1, 0 ), SubResource( 34 ), Vector2( 1, 1 ), SubResource( 35 ), Vector2( 1, 2 ), SubResource( 36 ), Vector2( 2, 0 ), SubResource( 37 ), Vector2( 2, 1 ), SubResource( 38 ), Vector2( 2, 2 ), SubResource( 39 ), Vector2( 3, 0 ), SubResource( 40 ), Vector2( 3, 1 ), SubResource( 41 ), Vector2( 3, 2 ), SubResource( 42 ) ]
+4/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 29 ), Vector2( 0, 1 ), SubResource( 30 ), Vector2( 0, 2 ), SubResource( 31 ), Vector2( 1, 0 ), SubResource( 32 ), Vector2( 1, 1 ), SubResource( 33 ), Vector2( 1, 2 ), SubResource( 34 ), Vector2( 2, 0 ), SubResource( 35 ), Vector2( 2, 1 ), SubResource( 36 ), Vector2( 2, 2 ), SubResource( 37 ), Vector2( 3, 0 ), SubResource( 38 ), Vector2( 3, 1 ), SubResource( 39 ), Vector2( 3, 2 ), SubResource( 40 ) ]
 4/autotile/navpoly_map = [  ]
 4/autotile/priority_map = [  ]
 4/autotile/z_index_map = [  ]
 4/occluder_offset = Vector2( 0, 0 )
-4/occluder = SubResource( 45 )
+4/occluder = SubResource( 43 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shapes = [ {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 46 ),
+"shape": SubResource( 44 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 47 ),
+"shape": SubResource( 45 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 48 ),
+"shape": SubResource( 46 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 49 ),
+"shape": SubResource( 47 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 50 ),
+"shape": SubResource( 48 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 51 ),
+"shape": SubResource( 49 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 52 ),
+"shape": SubResource( 50 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 53 ),
+"shape": SubResource( 51 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 54 ),
+"shape": SubResource( 52 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 55 ),
+"shape": SubResource( 53 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 56 ),
+"shape": SubResource( 54 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 57 ),
+"shape": SubResource( 55 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 4/z_index = 800

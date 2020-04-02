@@ -2,12 +2,10 @@
 
 [ext_resource path="res://scene/game/enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://graphics/sprite/temp.png" type="Texture" id=2]
+[ext_resource path="res://scene/game/enemy/LightShape.tres" type="OccluderPolygon2D" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
-
-[sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -15, 20, 0, 17, 15, 20, 20, 25, 15, 30, 0, 33, -15, 30, -20, 25 )
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,4 +16,4 @@ position = Vector2( 16, 0 )
 texture = ExtResource( 2 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Spr_Enemy"]
-occluder = SubResource( 2 )
+occluder = ExtResource( 3 )

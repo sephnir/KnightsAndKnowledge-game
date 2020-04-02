@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scene/character_select/character_select.gd" type="Script" id=1]
 [ext_resource path="res://font/UI.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scene/character_select/profile_box/profile_box.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/component/loading_screen/loading_screen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scene/component/logout/logout.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/music/profile.ogg" type="AudioStream" id=6]
 
 [node name="Scn_CharacterSelect" type="Node2D"]
 position = Vector2( 133.897, 58.7191 )
@@ -64,4 +65,8 @@ margin_left = 1043.61
 margin_top = -58.0565
 margin_right = 1144.61
 margin_bottom = -18.0565
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

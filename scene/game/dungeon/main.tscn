@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scene/game/dungeon/Main.gd" type="Script" id=1]
 [ext_resource path="res://scene/game/dungeon/dungeon_tile.tres" type="TileSet" id=2]
 [ext_resource path="res://scene/game/gui/main.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/game/dungeon/quiz_popup/PU_Quiz.tscn" type="PackedScene" id=4]
 [ext_resource path="res://graphics/sprite/goal.png" type="Texture" id=5]
+[ext_resource path="res://scene/game/dungeon/Lbl_Score.gd" type="Script" id=6]
 [ext_resource path="res://scene/game/dungeon/hud/HP_Hud.gd" type="Script" id=7]
+[ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=8]
+[ext_resource path="res://audio/music/dungeon.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Image" id=3]
 data = {
@@ -54,6 +57,8 @@ color = Color( 0.298039, 0.294118, 0.282353, 1 )
 [node name="Player" type="Node2D" parent="."]
 show_behind_parent = true
 
+[node name="Item" type="Node2D" parent="."]
+
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="HR_SprLoader" type="HTTPRequest" parent="."]
@@ -72,4 +77,20 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Lbl_Score" type="Label" parent="GUI"]
+margin_left = 840.0
+margin_top = 30.0
+margin_right = 1246.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 8 )
+align = 2
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
 [connection signal="request_completed" from="HR_SprLoader" to="." method="_on_HR_SprLoader_request_completed"]

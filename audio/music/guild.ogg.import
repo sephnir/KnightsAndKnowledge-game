@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/guild.ogg-456fd17c1329b1aa2f2c2bc18bd08a76.oggstr"
+
+[deps]
+
+source_file="res://audio/music/guild.ogg"
+dest_files=[ "res://.import/guild.ogg-456fd17c1329b1aa2f2c2bc18bd08a76.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -12,6 +12,7 @@ func damage():
 	if global.current_hp == 0:
 		get_tree().change_scene("res://scene/game/result/Result.tscn");
 	
+func _process(delta):
 	update();
 
 func _draw():

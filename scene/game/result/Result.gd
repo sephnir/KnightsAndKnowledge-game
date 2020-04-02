@@ -3,7 +3,8 @@ extends Control
 onready var global = $"/root/Global";
 
 func _ready():
-	if(global.current_floor > global.quest.level):
+	if(false):
+#	if(global.current_floor > global.quest.level):
 		$"Lbl_Header".text = "Quest Complete!";
 		return;
 

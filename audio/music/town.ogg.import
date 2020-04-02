@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/town.ogg-e8b8745e2436960c56e41e7dee7471f3.oggstr"
+
+[deps]
+
+source_file="res://audio/music/town.ogg"
+dest_files=[ "res://.import/town.ogg-e8b8745e2436960c56e41e7dee7471f3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
