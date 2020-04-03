@@ -29,8 +29,9 @@ func init_global():
 		global.dungeon_seed = hash(quest.dungeon_seed);
 	else:
 		global.dungeon_seed = hash(quest.name);
+	global.score = global.INITIAL_SCORE;
 	global.current_floor = 1;
-	global.current_hp = 6;
+	global.current_hp = global.MAX_HP;
 
 func _on_HR_FetchTopics_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8());
