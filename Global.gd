@@ -18,6 +18,7 @@ const CLIENT_ID = 1;
 const CLIENT_GRANT = "TzzipodhcJHdkv8bhIC37st3z9MBKn94MRRtw1Tw";
 
 const MAX_HP = 6;
+const INITIAL_SCORE = 1000;
 
 # Global variables
 var token = "";
@@ -43,7 +44,7 @@ var movement_rand = RandomNumberGenerator.new();
 var current_floor = 0;
 var current_hp = MAX_HP;
 var dungeon_seed = "";
-var score = 3000;
+var score = INITIAL_SCORE;
 
 func save_auth(auth):
 	_save_file(AUTH_PATH, auth);
