@@ -16,7 +16,8 @@ func force_scroll_style():
 	vsbar.rect_scale.x= 2;
 	vsbar.rect_position.x = ilguilds.rect_size.x - vsbar.rect_min_size.x * vsbar.rect_scale.x;
 	vsbar.update();
-	
+
+# Fetch list of joined guild history
 func fetch_guilds():
 	guild.find_node('Cpn_Loading').visible = true;
 	var request_url = global.get_request_url(routes.API_CHARA_JOINED_GUILD);
@@ -31,6 +32,7 @@ func fetch_guilds():
 	
 	$HR_FetchGuilds.request(request_url, headers, false, HTTPClient.METHOD_POST, query);
 
+# Callback for fetching list of joined guild history
 func _on_HR_FetchGuilds_request_completed(result, response_code, headers, body):
 	guild.find_node('Cpn_Loading').visible = false;
 	var json = JSON.parse(body.get_string_from_utf8());

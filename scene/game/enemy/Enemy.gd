@@ -11,7 +11,7 @@ var solid_tiles;
 var topic = -1;
 var dist_to_player = 0;
 
-#Called when object ready
+# Called when object ready
 func _ready():
 	grid_pos = position/unit;
 	grid_pos.x = floor(grid_pos.x);
@@ -19,17 +19,18 @@ func _ready():
 	topic = randi() % global.topics.size();
 	load_sprite();
 
+# Load texture as sprite
 func load_sprite():
 	$Spr_Enemy.texture = global.topics[topic].sprite_tex;
 	update();
 
-#Contructor. Call when instancing
+# Call when instancing
 func init(tilemap, solid_tiles, pos):
 	self.tilemap = tilemap;
 	self.solid_tiles = solid_tiles;
 	self.position = pos;
 
-#Randomly moves grid-based position of self
+# Randomly moves grid-based position of self
 func move_random():
 	momentum_grid.x = clamp(momentum_grid.x + 
 		global.movement_rand.randi_range(-1, 1), -1, 1);
@@ -48,16 +49,17 @@ func move_random():
 	else:
 		momentum_grid.y = -momentum_grid.y;
 
-#Move sprite smoothly to the new grid position
+# Move sprite smoothly to the new grid position
 func move_sprite():
 	if(position.distance_to(grid_pos * unit) > 1 ):
 		position += ((grid_pos * unit) - position ) / 5;
 
+# Update the shading of sprite based on distance to player
 func update_lighting():
 	var temp = clamp(1-dist_to_player/180+0.2,0.1,1);
 	modulate = Color(temp,temp,temp);
 
-#Called every frame
+# Called every frame
 func _process(delta):
 	move_sprite();
 	update_lighting();

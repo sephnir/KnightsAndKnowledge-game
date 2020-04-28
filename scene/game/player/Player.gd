@@ -21,24 +21,26 @@ func _ready():
 	animplayer.play("idle");
 	pass # Replace with function body.
 
-#Constuctor. Call when instancing.
+# Call when instancing.
 func init(pos):
 	self.position = pos;
 
-#Moves self based on current velocity
+# Moves self based on current velocity
 func update_pos():
 	move_and_slide(velocity * speed);
 
-#Updates grid based on position of self
+# Updates grid based on position of self
 func update_grid():
 	grid = Vector2(floor(position.x/32), floor(position.y/32));
 
+# Update the current rotation of player
 func update_rotate():
 	if(velocity != Vector2(0,0)):
 		var nvel = velocity.normalized();
 		var angle = atan2(nvel.x, nvel.y);
 		$ViewportContainer/Viewport/PlayerModel/Model.rotation.y = angle;
 
+# Update model animation
 func update_anim():
 	if velocity == Vector2(0,0):
 		anim = ANIM.IDLE;
@@ -47,6 +49,7 @@ func update_anim():
 	else:
 		anim = ANIM.WALK;
 
+# Calls when animation ends
 func loop_anim():
 	update_anim();
 	if anim == ANIM.IDLE:

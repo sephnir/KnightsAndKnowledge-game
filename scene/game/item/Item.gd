@@ -30,10 +30,11 @@ func _ready():
 	self.type = global.dungeon_rand.randi_range(0, PATH.size()-1 );
 	load_sprite();
 
-#Contructor. Call when instancing
+# Call when instancing
 func init(pos):
 	self.position = pos;
-	
+
+# Call when player lands on item space	
 func collect():
 	match self.type:
 		TYPE.Potion:
@@ -46,6 +47,7 @@ func collect():
 			global.score += 500;
 	queue_free();
 
+# Load texture as sprite
 func load_sprite():
 	$Spr_Item.texture = load(PATH[type]);
 	update();
@@ -53,6 +55,7 @@ func load_sprite():
 func _process(delta):
 	update_lighting();
 
+# Update shading of sprite based on distance to player
 func update_lighting():
 	var temp = clamp(1-dist_to_player/180+0.2,0.1,1);
 	modulate = Color(temp,temp,temp);

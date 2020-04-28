@@ -42,19 +42,22 @@ var play_mode = false
 var open_tile_pos = [];
 var wall_tile_pos = [];
 
+# Called when scene is ready
 func _ready():
 	randomize();
 	fetch_sprites();
 	global.dungeon_rand.set_seed(hash(global.dungeon_seed));
 	global.movement_rand.set_seed(hash(global.dungeon_seed));
 	make_rooms();
-	
+
+# Called after room is created
 func _signal_room_created():
 	make_map();
 	setup_player_inst();
 	populate_dungeon(tile);
 	clear_rooms();
 
+# Fetch monster sprites from url in topics
 func fetch_sprites():
 	for topic in global.topics:
 		var request_url = global.get_cdn_url(topic.sprite_path);
@@ -89,16 +92,18 @@ func make_rooms():
 	
 	_signal_room_created();
 
-#TODO - Populate dungeon with enemies and chests
+# Populate dungeon with enemies and chests
 func populate_dungeon(tile):
 	generate_items(tile);
 	generate_enemies(tile);
 	update_goal_pos();
 
+# Set the goal position to the furthest from start room
 func update_goal_pos():
 	$Spr_Goal.position = Vector2(end_room.position.x, end_room.position.y);
 	$Spr_Goal.visible = true;
 
+# Generate item entities at random
 func generate_items(tile):
 	var item_count = 0;
 	for r in $Room.get_children():
@@ -115,7 +120,7 @@ func generate_items(tile):
 			$Item.add_child(item_inst);
 			item_count += 1;
 			
-
+# Generate enemy entities at random
 func generate_enemies(tile):
 	var enemies_count = 0;
 	for r in $Room.get_children():
@@ -362,7 +367,7 @@ func update_player_pos():
 		check_item();
 		move_enemy();
 		
-
+# Update entities attribute
 func update_entity_var():
 	if(!$Player.get_children()):
 		return;
@@ -375,6 +380,7 @@ func update_entity_var():
 		i.z_index = room_height/2 + i.position.y/10.0;
 		i.dist_to_player = i.position.distance_to(p.position);
 
+# Movement script for enemy entities
 func move_enemy():
 	var p = $Player.get_children()[0];
 	for e in $Enemy.get_children():
@@ -382,17 +388,20 @@ func move_enemy():
 		if(check_battle(p, e)):
 			battle(e);
 
+# Check if player landed on the same space as an enemy entity
 func check_battle(player, enemy):
 	var dist_x = abs(player.grid.x - enemy.grid_pos.x);
 	var dist_y = abs(player.grid.y - enemy.grid_pos.y);
 	return (dist_x + dist_y) <= 2;
 
+# Check if player landed on the goal space
 func check_goal():
 	var player = $Player.get_children()[0];
 	if (player.grid.x == floor($Spr_Goal.position.x/ tile_size) ):
 		if (player.grid.y == floor($Spr_Goal.position.y/ tile_size) ):
 			next_level();
 
+# Check if player landed on the same space as an item entity
 func check_item():
 	var player = $Player.get_children()[0];
 	for i in $Item.get_children():
@@ -401,6 +410,7 @@ func check_item():
 		if (dist_x + dist_y) == 0:
 			i.collect();
 
+# Load the next level
 func next_level():
 	global.current_floor += 1;
 	if(global.current_floor > global.quest.level):
@@ -408,10 +418,12 @@ func next_level():
 	else:
 		global.dungeon_seed = hash(str(global.dungeon_seed));
 		get_tree().change_scene("res://scene/game/dungeon/main.tscn");
-	
+
+# Load the result screen
 func quest_complete():
 	get_tree().change_scene("res://scene/game/result/Result.tscn");
 
+# Initiate battle scene
 func battle(enemy):
 	$GUI/PU_Quiz.activate(enemy, [$GUI/Control/Analog]);
 

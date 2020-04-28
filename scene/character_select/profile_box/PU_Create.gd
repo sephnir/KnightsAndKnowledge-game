@@ -3,6 +3,7 @@ extends Popup
 onready var global = $"/root/Global";
 onready var routes = $"/root/API";
 
+# Click handling for profile creation
 func _on_Btn_Create_button_up():
 	if($Pnl_Create/LE_Name.text.length() == 0):
 		$PUD_Error/Lbl_Msg.text = "Name field cannot be empty.";
@@ -23,11 +24,11 @@ func _on_Btn_Create_button_up():
 	$HR_CreateChara.request(request_url, headers, false, 
 		HTTPClient.METHOD_POST, query);
 
-
+# Closes profile creation dialog
 func _on_Btn_Cancel_button_up():
 	visible = false;
 
-
+# Callback after profile creation success
 func _on_HR_CreateChara_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8());
 	$Pnl_Create/Btn_Cancel.disabled = false;

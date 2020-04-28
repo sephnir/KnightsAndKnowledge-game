@@ -14,6 +14,7 @@ func _ready():
 		$Cpn_Loading.visible = true;
 		auth_check();
 
+# Automatic login if bearer token exists
 func auth_check():
 	timeout = global.CONNECTION_TIMEOUT;
 	var request_url = global.get_request_url(routes.API_USER_SHOW);
@@ -55,7 +56,7 @@ func _on_HR_Login_request_completed(result, response_code, headers, body ):
 		$PP_Notice/Lbl_Notice.set_text("Unable to connect to server.");
 		$PP_Notice.popup_centered();
 
-#Login
+# Call when login is clicked
 func _on_Btn_Login_button_up():
 	if($LE_Email.text == "" || $LE_Password.text == ""):
 		$PP_Notice/Lbl_Notice.set_text("E-mail/Password cannot be empty.");
@@ -74,6 +75,7 @@ func _on_Btn_Login_button_up():
 	$Btn_Login.disabled = true;
 	$Cpn_Loading.visible = true;
 
+# Construct header for http request
 func build_form_data(email, password):
 	return to_json({
 		"grant_type": "password",
@@ -95,6 +97,3 @@ func _process(delta):
 #		$HR_Login.cancel_request();
 #		var error = '{"error":"Connection timeout.\nPlease try again."}';
 #		_on_HR_Login_request_completed("timeout", 408, [], error.to_utf8());
-
-
-

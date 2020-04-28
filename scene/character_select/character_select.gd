@@ -1,8 +1,6 @@
 extends Node2D
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 onready var global = $"/root/Global";
 onready var routes = $"/root/API";
 

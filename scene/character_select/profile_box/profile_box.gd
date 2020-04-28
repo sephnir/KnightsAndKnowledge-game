@@ -1,8 +1,5 @@
 extends Button
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var charId = -1;
 var charName = "Create\nNew";
 var experience = 0;
@@ -31,7 +28,7 @@ func _process(delta):
 		$VpC_Character.visible = false;
 		
 
-
+# Click handling for profile selection
 func _on_Btn_Profile_button_up():
 	if(charId != -1):
 		global.character = charId;
