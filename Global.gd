@@ -1,11 +1,12 @@
 extends Node
 
 # Constants
-#const HOSTNAME = "10.27.161.120";
 const HOSTNAME = "127.0.0.1";
-#const HOSTNAME = "192.168.43.40";
-#const HOSTNAME = "192.168.1.72";
 const PORT = 8000;
+
+const CLIENT_ID = 1;
+const CLIENT_GRANT = "TzzipodhcJHdkv8bhIC37st3z9MBKn94MRRtw1Tw";
+
 
 const CONNECTION_TIMEOUT = 500;
 
@@ -13,9 +14,6 @@ const DUNGEON_UNIT = 32;
 
 const AUTH_PATH = "user://auth.data";
 const GUILD_PATH = "user://guild.data";
-
-const CLIENT_ID = 1;
-const CLIENT_GRANT = "TzzipodhcJHdkv8bhIC37st3z9MBKn94MRRtw1Tw";
 
 const MAX_HP = 6;
 const INITIAL_SCORE = 1000;
