@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/light.bmp-df73da62a22a57a0083c5652790174b3.image"
+
+[deps]
+
+source_file="res://graphics/texture/light.bmp"
+dest_files=[ "res://.import/light.bmp-df73da62a22a57a0083c5652790174b3.image" ]
+
+[params]
+

@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scene/game/dungeon/quiz_popup/Btn_Ans.tscn" type="PackedScene" id=1]
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scene/game/dungeon/quiz_popup/PU_Quiz.gd" type="Script" id=3]
+
+[node name="PU_Quiz" type="Popup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+popup_exclusive = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pnl_Bg" type="Panel" parent="."]
+self_modulate = Color( 1, 0, 0, 0.364706 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -361.5
+margin_right = 640.0
+margin_bottom = 361.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pnl_Qns" type="Panel" parent="Pnl_Bg"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -561.0
+margin_top = 176.63
+margin_right = 562.0
+margin_bottom = 396.63
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lbl_Qns" type="Label" parent="Pnl_Bg/Pnl_Qns"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1114.0
+margin_bottom = 210.0
+rect_clip_content = true
+custom_fonts/font = ExtResource( 2 )
+text = "Test message"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_Ans" parent="Pnl_Bg" instance=ExtResource( 1 )]
+margin_left = -561.0
+margin_top = 69.6302
+margin_right = -39.0
+margin_bottom = 165.63
+
+[node name="Btn_Ans2" parent="Pnl_Bg" instance=ExtResource( 1 )]
+margin_left = 41.0
+margin_top = 69.6302
+margin_right = 563.0
+margin_bottom = 165.63
+
+[node name="Btn_Ans3" parent="Pnl_Bg" instance=ExtResource( 1 )]
+margin_left = -561.0
+margin_top = 205.16
+margin_right = -39.0
+margin_bottom = 301.16
+
+[node name="Btn_Ans4" parent="Pnl_Bg" instance=ExtResource( 1 )]
+margin_left = 41.0
+margin_top = 205.13
+margin_right = 563.0
+margin_bottom = 301.13

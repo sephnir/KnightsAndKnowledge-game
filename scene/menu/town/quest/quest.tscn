@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scene/menu/town/quest/quest.gd" type="Script" id=1]
+[ext_resource path="res://font/UI_s.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scene/component/loading_screen/loading_screen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://font/UI.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scene/menu/town/quest/QuestDescription/Pnl_QuestDesc.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/music/quest.ogg" type="AudioStream" id=6]
+
+[node name="Quest" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IL_Quest" type="ItemList" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -587.0
+margin_top = -220.0
+margin_right = 71.0
+margin_bottom = 232.0
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lbl_Notice" type="Label" parent="IL_Quest"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -291.5
+margin_top = -85.5
+margin_right = 291.5
+margin_bottom = 85.5
+custom_fonts/font = ExtResource( 2 )
+text = "Sample Text"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_Back" type="Button" parent="."]
+margin_left = 53.0
+margin_top = 618.691
+margin_right = 346.0
+margin_bottom = 684.691
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HR_FetchQuests" type="HTTPRequest" parent="."]
+
+[node name="Cpn_Loading" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -415.5
+margin_top = 31.6456
+margin_right = 415.5
+margin_bottom = 139.646
+custom_fonts/font = ExtResource( 4 )
+text = "Select a quest"
+align = 1
+
+[node name="Pnl_QuestDesc" parent="." instance=ExtResource( 5 )]
+margin_top = 139.646
+margin_bottom = 699.646
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+[connection signal="item_selected" from="IL_Quest" to="." method="_on_IL_Quest_item_selected"]
+[connection signal="button_up" from="Btn_Back" to="." method="_on_Btn_Back_button_up"]
+[connection signal="request_completed" from="HR_FetchQuests" to="." method="_on_HR_FetchQuests_request_completed"]

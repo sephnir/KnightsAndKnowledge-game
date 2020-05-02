@@ -1,0 +1,153 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://graphics/gui/map_btn/blacksmith_icon.png" type="Texture" id=1]
+[ext_resource path="res://graphics/bg/map/town-min.png" type="Texture" id=2]
+[ext_resource path="res://graphics/bg/map/town-blur.png" type="Texture" id=3]
+[ext_resource path="res://scene/menu/town/Bg_MapBlur.gd" type="Script" id=4]
+[ext_resource path="res://graphics/gui/map_btn/inn_icon.png" type="Texture" id=5]
+[ext_resource path="res://scene/component/dialog_box/dialog_box.tscn" type="PackedScene" id=6]
+[ext_resource path="res://graphics/gui/map_btn/quest_icon.png" type="Texture" id=7]
+[ext_resource path="res://graphics/gui/map_btn/guild_icon.png" type="Texture" id=8]
+[ext_resource path="res://font/Fancy.tres" type="DynamicFont" id=9]
+[ext_resource path="res://audio/music/town.ogg" type="AudioStream" id=10]
+[ext_resource path="res://scene/component/auth/Auth.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scene/menu/town/menu.gd" type="Script" id=12]
+[ext_resource path="res://scene/menu/sidebar/Pnl_Sidebar.tscn" type="PackedScene" id=13]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 12 )
+
+[node name="Auth" parent="." instance=ExtResource( 11 )]
+
+[node name="Bg_Map" type="Sprite" parent="."]
+position = Vector2( 790, 359.7 )
+scale = Vector2( 0.806195, 0.828803 )
+texture = ExtResource( 2 )
+
+[node name="Btn_Quest" type="TextureButton" parent="Bg_Map"]
+margin_left = -138.0
+margin_top = 72.0
+margin_right = 181.0
+margin_bottom = 410.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spr_Quest" type="Sprite" parent="Bg_Map/Btn_Quest"]
+position = Vector2( 158.474, 148.712 )
+scale = Vector2( 0.597358, 0.628736 )
+texture = ExtResource( 7 )
+
+[node name="Lbl_Quest" type="Label" parent="Bg_Map/Btn_Quest"]
+margin_left = 78.0684
+margin_top = 229.846
+margin_right = 240.068
+margin_bottom = 317.846
+rect_pivot_offset = Vector2( 96.5044, 36.1891 )
+custom_fonts/font = ExtResource( 9 )
+text = "Quest"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_Inn" type="TextureButton" parent="Bg_Map"]
+margin_left = 302.0
+margin_top = -121.0
+margin_right = 603.0
+margin_bottom = 193.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spr_Inn" type="Sprite" parent="Bg_Map/Btn_Inn"]
+position = Vector2( 156.396, 121.001 )
+scale = Vector2( 0.683838, 0.683838 )
+texture = ExtResource( 5 )
+
+[node name="Lbl_Inn" type="Label" parent="Bg_Map/Btn_Inn"]
+margin_left = 120.207
+margin_top = 254.0
+margin_right = 223.207
+margin_bottom = 342.0
+rect_pivot_offset = Vector2( 96.5044, 36.1891 )
+custom_fonts/font = ExtResource( 9 )
+text = "Inn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_Blacksmith" type="TextureButton" parent="Bg_Map"]
+margin_left = -573.0
+margin_top = -167.0
+margin_right = -254.0
+margin_bottom = 217.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spr_Blacksmith" type="Sprite" parent="Bg_Map/Btn_Blacksmith"]
+position = Vector2( 140.976, 167.087 )
+scale = Vector2( 0.599733, 0.599733 )
+texture = ExtResource( 1 )
+
+[node name="Lbl_Blacksmith" type="Label" parent="Bg_Map/Btn_Blacksmith"]
+margin_left = -22.3896
+margin_top = 308.213
+margin_right = 265.61
+margin_bottom = 396.213
+rect_pivot_offset = Vector2( 96.5044, 36.1891 )
+custom_fonts/font = ExtResource( 9 )
+text = "Blacksmith"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_Guild" type="TextureButton" parent="Bg_Map"]
+margin_left = -138.0
+margin_top = -432.0
+margin_right = 178.0
+margin_bottom = -60.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spr_Guild" type="Sprite" parent="Bg_Map/Btn_Guild"]
+position = Vector2( 163.285, 191.752 )
+scale = Vector2( 0.610614, 0.628915 )
+texture = ExtResource( 8 )
+
+[node name="Lbl_Guild" type="Label" parent="Bg_Map/Btn_Guild"]
+margin_left = 17.9021
+margin_top = 25.4582
+margin_right = 167.902
+margin_bottom = 113.458
+rect_pivot_offset = Vector2( 96.5044, 36.1891 )
+custom_fonts/font = ExtResource( 9 )
+text = "Guild"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg_MapBlur" type="Sprite" parent="Bg_Map"]
+visible = false
+position = Vector2( -201.552, -25.129 )
+scale = Vector2( 1.33102, 1.05922 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="PP_Notice" parent="." instance=ExtResource( 6 )]
+margin_left = -92.6016
+margin_top = 369.512
+margin_right = 107.398
+margin_bottom = 454.512
+
+[node name="Pnl_Sidebar" parent="." instance=ExtResource( 13 )]
+margin_top = -0.000747681
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+[connection signal="button_up" from="Bg_Map/Btn_Quest" to="." method="_on_Btn_Quest_button_up"]
+[connection signal="button_up" from="Bg_Map/Btn_Blacksmith" to="." method="_on_Btn_Blacksmith_button_up"]
+[connection signal="button_up" from="Bg_Map/Btn_Blacksmith" to="Bg_Map/Btn_Blacksmith" method="_on_blacksmith_button_up"]
+[connection signal="button_up" from="Bg_Map/Btn_Guild" to="." method="_on_Btn_Guild_button_up"]

@@ -16,26 +16,57 @@ _global_script_class_icons={
 [application]
 
 config/name="KnightsKnowledge"
-run/main_scene="res://scene/main.tscn"
+run/main_scene="res://scene/login/login.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Constants="*res://Constants.gd"
 IconLoader="*res://addons/file-editor/scripts/IconLoader.gd"
 LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
+Global="*res://Global.gd"
+API="*res://API.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
+settings/stdout/verbose_stdout=true
 
 [display]
 
-window/stretch/mode="2d"
+window/size/width=1280
+window/size/height=720
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
 enabled=PoolStringArray( "file-editor" )
 
+[input]
+
+mouse_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[physics]
+
+2d/physics_engine="GodotPhysics"
+2d/default_gravity=0
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/intended_usage/framebuffer_allocation=3
+quality/intended_usage/framebuffer_allocation.mobile=2
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
+quality/shadows/filter_mode=0
+quality/reflections/texture_array_reflections=false
+quality/reflections/texture_array_reflections.mobile=true
+quality/reflections/high_quality_ggx.mobile=true
+quality/shading/force_vertex_shading.mobile=false
+quality/shading/force_lambert_over_burley.mobile=false
+quality/shading/force_blinn_over_ggx.mobile=false
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

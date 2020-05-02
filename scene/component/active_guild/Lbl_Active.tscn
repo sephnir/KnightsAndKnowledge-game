@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font/UI_tiny.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scene/component/active_guild/Lbl_Active.gd" type="Script" id=2]
+
+[node name="Lbl_Active" type="Label"]
+margin_left = 80.0
+margin_top = 40.0
+margin_right = 956.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 1 )
+text = "text sample"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
